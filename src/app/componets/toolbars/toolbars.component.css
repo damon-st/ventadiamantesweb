@@ -1,0 +1,15 @@
+.example-spacer{
+    flex: 1 1 auto;
+}
+.margin-icon{
+    margin: 15px auto;
+    padding-top: 5px;
+}
+
+.btn-close{
+    cursor: pointer;
+}
+
+.btn-close:hover{
+    border: 2px solid slateblue;
+}

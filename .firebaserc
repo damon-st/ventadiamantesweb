@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ventadiamantes-329aa": {
+      "hosting": {
+        "ventadiamante": [
+          "ventadiamantes-329aa"
+        ]
+      }
+    }
+  }
+}
