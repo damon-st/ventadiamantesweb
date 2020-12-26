@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
 
 
   login(datos: FormGroup): void{
-      console.log(datos);
       this.auth.Login(datos).then((user)=>{
         this.router.navigate(['/home']);
         

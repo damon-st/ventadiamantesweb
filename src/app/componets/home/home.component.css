@@ -1,0 +1,26 @@
+.text-center{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.card-venta{
+    width: 50%;
+    margin: 15px auto;
+}
+
+.diamante{
+  width: 300px;
+  margin: 15px auto;
+}
+
+.imgDiamante{
+    width: 150px;
+    align-content: center;
+}
+
+.radio{
+    margin: 15px auto;
+    align-content: center;
+}
+

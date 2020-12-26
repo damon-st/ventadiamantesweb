@@ -12,4 +12,5 @@
 
 .btn-close:hover{
     border: 2px solid slateblue;
+    font-size: 18px;
 }
