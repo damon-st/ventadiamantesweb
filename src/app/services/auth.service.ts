@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
 import firebase from 'firebase/app';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -12,7 +13,8 @@ export class AuthService {
 
   isLoadin:boolean = false;
   public user: Observable<firebase.User>;
-  constructor(private auth: AngularFireAuth) { 
+  constructor(private auth: AngularFireAuth,
+      private database: AngularFireDatabase) { 
     this.user = this.auth.authState;
   }
 
@@ -40,5 +42,9 @@ export class AuthService {
     return this.auth.authState.pipe(map(auth => auth));
   }
 
+
+  public getDataUser(userid: any){
+    return this.database.list('Users');
+  }
 
 }

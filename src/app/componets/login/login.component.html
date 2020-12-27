@@ -1,4 +1,6 @@
 <mat-card class="card-login">
+    <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+
     <mat-card-header>
         <h2 class="text-center">Inciar Seccion</h2>
     </mat-card-header>
@@ -20,7 +22,16 @@
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     
                     </button>
+                    <br>
                   </mat-form-field>
+                  <mat-error *ngIf="codeError ==='auth/wrong-password'" class="error-msg">
+                    La contraseña ingresada es incorrecta intenta nueva mente;
+                   </mat-error>
+                   <mat-error *ngIf="codeError === 'auth/user-not-found'" class="error-msg">
+                    El correo ingresado no existe en la base de datos, compruebalo y reeintenta 
+                    nuevamente
+                   </mat-error>
+
 
                   <button mat-raised-button color="primary" class="input-container" [disabled]="control.invalid">Iniciar Sesion</button>
 

@@ -12,6 +12,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
 
   hide:boolean = true;
+  loading:boolean =false;
+  codeError:string;
 
   control= new FormGroup({email:new FormControl('',[Validators.required,Validators.email]),
             password: new FormControl('',[Validators.required,Validators.minLength(6)])})
@@ -42,10 +44,16 @@ export class LoginComponent implements OnInit {
 
 
   login(datos: FormGroup): void{
+    this.loading = true;
       this.auth.Login(datos).then((user)=>{
+        this.loading =false;
         this.router.navigate(['/home']);
         
-      }).catch(err=>{console.log(err)});
+      }).catch(err=>{
+        console.log(err.code)
+        this.codeError = err.code;
+        this.loading = false;
+      });
   }
 
 }

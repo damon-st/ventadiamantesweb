@@ -8,6 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 
 import {MatRadioModule} from '@angular/material/radio';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatInputModule,
     MatButtonModule,
     MatGridListModule,
-    MatRadioModule
+    MatRadioModule,
+    MatProgressBarModule
     ]
 })
 export class MaterialModulesI{}

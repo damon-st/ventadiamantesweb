@@ -7,18 +7,41 @@
   (afterChange)="afterChange($event)"
   (beforeChange)="beforeChange($event)"
 >
-<div ngxSlickItem class="slide margen" *ngFor="let dia of diamante">
-  <img src="assets/img/diamante.jpg" alt="imagen" class="imgDiamante" />
+  <div ngxSlickItem class="slide margen" *ngFor="let dia of diamante">
+    <img src="assets/img/diamante.jpg" alt="imagen" class="imgDiamante" />
 
-  <p class="text-center">{{ dia.descripcion }}</p>
-  <p class="text-center">$ {{ dia.precio }}</p>
+    <p class="text-center">{{ dia.descripcion }}</p>
+    <p class="text-center">$ {{ dia.precio }}</p>
 
-  <div class="radio">
-    <mat-radio-button  [value]="" (change)="recuperarSelecion(dia)"
-    >Precio</mat-radio-button>
+    <div class="radio">
+      <mat-radio-button [value]="" (change)="recuperarSelecion(dia)"
+        >Seleccion</mat-radio-button
+      >
+    </div>
   </div>
-  
-</div>
 </ngx-slick-carousel>
 
+<mat-progress-bar mode="query" *ngIf="!isReady"></mat-progress-bar>
+<div class="container" *ngIf="isReady">
+  <p>Vendedor: {{ datosVendedor.name }}</p>
+  <p>Fecha: {{ ventaDiamante.fechaVenta }}</p>
 
+  <form  #f="ngForm" (ngSubmit)="crearVenta()">
+    <mat-form-field class="example-full-width">
+      <mat-label>Escribe aqui el id del jugador</mat-label>
+      <input matInput #message maxlength="256" minlength="6" placeholder="" name="descripcion" [(ngModel)]="ventaDiamante.descripcion" required/>
+      <mat-hint align="start"><strong>no olvidar</strong> </mat-hint>
+      <mat-hint align="end">{{ message.value.length }} / 256</mat-hint>
+    </mat-form-field>
+
+
+    <mat-label>Selecciona las imagenes</mat-label>
+    <input type="file" (change)="recuperarDirImages($event)" accept=".png, .jpg, .jpeg">
+    <br>
+    <input #imageFiles type="hidden" [value]="urlImage | async"/>
+    <mat-progress-bar mode="determinate" [value]="valorSubidaImg" class="progress"></mat-progress-bar>
+
+    <button mat-raised-button color="primary"  [disabled]="f.invalid"  class="btn-block">Vender</button>
+
+  </form>
+</div>

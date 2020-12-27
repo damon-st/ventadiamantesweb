@@ -19,6 +19,12 @@ import { DiamantesService } from './services/diamantes.service';
 //para el carousel
 import {SlickCarouselModule} from 'ngx-slick-carousel';
 
+import {AngularFirestoreModule}from '@angular/fire/firestore';
+import {AngularFireStorageModule,BUCKET}from '@angular/fire/storage';
+import { AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,10 +40,14 @@ import {SlickCarouselModule} from 'ngx-slick-carousel';
     MaterialModulesI,
     FormsModule,
     ReactiveFormsModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
     
   ],
-  providers: [AuthService,DiamantesService],
+  providers: [{provide:BUCKET,useValue:'gs://ventadiamantes-329aa.appspot.com'},AuthService,DiamantesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
