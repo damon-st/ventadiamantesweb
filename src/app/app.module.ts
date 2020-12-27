@@ -16,6 +16,9 @@ import { HomeComponent } from './componets/home/home.component';
 import { AuthService } from './services/auth.service';
 import { DiamantesService } from './services/diamantes.service';
 
+//para el carousel
+import {SlickCarouselModule} from 'ngx-slick-carousel';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +33,8 @@ import { DiamantesService } from './services/diamantes.service';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     MaterialModulesI,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SlickCarouselModule
     
   ],
   providers: [AuthService,DiamantesService],

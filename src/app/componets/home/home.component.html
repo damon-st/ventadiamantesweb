@@ -1,9 +1,24 @@
-<div class="diamante">
+<ngx-slick-carousel
+  class="carousels"
+  #slickModal="slick-carousel"
+  [config]="slideConfig"
+  (init)="slickInit($event)"
+  (breakpoint)="breakpoint($event)"
+  (afterChange)="afterChange($event)"
+  (beforeChange)="beforeChange($event)"
+>
+<div ngxSlickItem class="slide margen" *ngFor="let dia of diamante">
   <img src="assets/img/diamante.jpg" alt="imagen" class="imgDiamante" />
 
-  <p class="text-center">Descripcion</p>
-  <p class="text-center">PrecioDiamnte</p>
+  <p class="text-center">{{ dia.descripcion }}</p>
+  <p class="text-center">$ {{ dia.precio }}</p>
 
-  <mat-radio-button class="radio" [value]="">Precio</mat-radio-button>
+  <div class="radio">
+    <mat-radio-button  [value]="" (change)="recuperarSelecion(dia)"
+    >Precio</mat-radio-button>
+  </div>
+  
 </div>
+</ngx-slick-carousel>
+
 

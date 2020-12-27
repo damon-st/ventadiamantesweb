@@ -20,6 +20,15 @@ export class LoginComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+    
+    this.auth.user.subscribe(user=>{
+        if(!user){
+          this.router.navigate(['/login']);
+        }else{
+          this.router.navigate(['/home']);
+        }
+    });
+    
   }
 
   getErrorMessage(): string{

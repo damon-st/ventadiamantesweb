@@ -1,4 +1,3 @@
-export interface DiamanteI{
-    descripcion: string;
-    precio: number;
+export class DiamanteI{
+    constructor(descripcion: string, precio: number){}
 }
