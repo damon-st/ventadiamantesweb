@@ -47,6 +47,14 @@
     <input #imageFiles type="hidden" [value]="urlImage | async"/>
     <mat-progress-bar mode="determinate" [value]="valorSubidaImg" class="progress"></mat-progress-bar>
 
+
+    <mat-grid-list cols="2" rowHeight="2:1">
+      <mat-grid-tile *ngFor="let i of imgRef">
+        <img [src]="i" alt="img">
+      </mat-grid-tile>
+    </mat-grid-list>
+    
+
     <button mat-raised-button color="primary"  [disabled]="f.invalid"  class="btn-block">Vender</button>
 
   </form>

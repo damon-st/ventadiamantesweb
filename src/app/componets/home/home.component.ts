@@ -125,23 +125,31 @@ export class HomeComponent implements OnInit {
 
 
   recuperarDirImages(e : any){
-    this.valorSubidaImg = 10;
-    const file = e.target.files[0];
-    const  id = Math.random().toString(36).substring(2);
-    const filePath = `eliminar/${id}`;
-    const ref = this.storage.ref(filePath);
-    const task = this.storage.upload(filePath,file);
+    const file = e.target.files[0];    
+    if(file !==null){
+      const size = file.size;
+      if(size >= 1000){
+        this.valorSubidaImg = 10;
+        const  id = Math.random().toString(36).substring(2);
+        const filePath = `eliminar/${id}`;
+        const ref = this.storage.ref(filePath);
+        const task = this.storage.upload(filePath,file);
+    
+        task.snapshotChanges()
+        .pipe(finalize(() =>{
+            this.urlImage = ref.getDownloadURL();        
+            this.valorSubidaImg = 75;
+            
+        })).subscribe();
+    
+        setTimeout(() => {
+          this.cambio();
+        }, 2000);
+      }
+     
+    }
 
-    task.snapshotChanges()
-    .pipe(finalize(() =>{
-        this.urlImage = ref.getDownloadURL();        
-        this.valorSubidaImg = 75;
-        
-    })).subscribe();
-
-    setTimeout(() => {
-      this.cambio();
-    }, 2000);
+   
   }
 
 
@@ -186,7 +194,11 @@ export class HomeComponent implements OnInit {
 
   crearVenta(){
     //this.imgRef.push(this.imageFiles.nativeElement.value);
-    console.log(this.ventaDiamante);
+
+    if(this.ventaDiamante.descripcionDiamantes === ''){
+      swal('Error','Por favor seleciona el diamante vendido', 'error');
+    }else{
+         console.log(this.ventaDiamante);
     this.ventaDiamante.image.push(...this.imgRef);
     this.diamanteSvc.uploadVenta(this.ventaDiamante);
     swal({
@@ -203,6 +215,9 @@ export class HomeComponent implements OnInit {
         swal("Recarga manualmente la pagina");
       }
     });
+    }
+
+ 
     
   }
 
