@@ -211,6 +211,7 @@ export class HomeComponent implements OnInit {
     .then((willDelete) => {
       if (willDelete) {
        //window.location.reload();
+         this.valorSubidaImg= 0;
          this.imgRef = [];
          this.imageFiles.nativeElement.value = '';
          this.ventaDiamante.image = [];

@@ -29,8 +29,9 @@
 
 <mat-progress-bar mode="query" *ngIf="!isReady"></mat-progress-bar>
 <div class="container" *ngIf="isReady">
-  <p>Vendedor: {{ datosVendedor.name }}</p>
-  <p>Fecha: {{ ventaDiamante.fechaVenta }}</p>
+  <p class="parrafos">Diamante selecionado: {{ventaDiamante.descripcionDiamantes}} ${{ventaDiamante.precioDiamante}}</p>
+  <p class="parrafos">Vendedor: {{ datosVendedor.name }}</p>
+  <p class="parrafos">Fecha: {{ ventaDiamante.fechaVenta }}</p>
 
   <form  #f="ngForm" (ngSubmit)="crearVenta()">
     <mat-form-field class="example-full-width">
