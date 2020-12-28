@@ -35,7 +35,7 @@
   <form  #f="ngForm" (ngSubmit)="crearVenta()">
     <mat-form-field class="example-full-width">
       <mat-label>Escribe aqui el id del jugador</mat-label>
-      <input matInput #message maxlength="256" minlength="6" placeholder="" name="descripcion" [(ngModel)]="ventaDiamante.descripcion" required/>
+      <input matInput #message maxlength="256" minlength="4" placeholder="" name="descripcion" [(ngModel)]="ventaDiamante.descripcion" required/>
       <mat-hint align="start"><strong>no olvidar</strong> </mat-hint>
       <mat-hint align="end">{{ message.value.length }} / 256</mat-hint>
     </mat-form-field>
@@ -48,7 +48,7 @@
     <mat-progress-bar mode="determinate" [value]="valorSubidaImg" class="progress"></mat-progress-bar>
 
 
-    <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-list cols="2" rowHeight="2:1"*ngIf="imgRef.length">
       <mat-grid-tile *ngFor="let i of imgRef">
         <img [src]="i" alt="img">
       </mat-grid-tile>

@@ -139,12 +139,12 @@ export class HomeComponent implements OnInit {
         .pipe(finalize(() =>{
             this.urlImage = ref.getDownloadURL();        
             this.valorSubidaImg = 75;
-            
+            setTimeout(() => {
+              this.cambio();
+            }, 1000);
         })).subscribe();
     
-        setTimeout(() => {
-          this.cambio();
-        }, 2000);
+        
       }
      
     }
@@ -205,12 +205,15 @@ export class HomeComponent implements OnInit {
       title: "Exito",
       text: "Se a creado la venta exitosamente recargare la pagina :D",
       icon: "success",
-      buttons: ['cancelar','recargar'],
+      buttons: ['cancelar','nueva recargar'],
       dangerMode: true,
     })
     .then((willDelete) => {
       if (willDelete) {
-        window.location.reload();
+       //window.location.reload();
+         this.imgRef = [];
+         this.imageFiles.nativeElement.value = '';
+         this.ventaDiamante.image = [];
       } else {
         swal("Recarga manualmente la pagina");
       }
