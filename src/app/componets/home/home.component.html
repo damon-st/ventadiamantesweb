@@ -21,6 +21,12 @@
   </div>
 </ngx-slick-carousel>
 
+<div class="example-button-container">
+  <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="addSlide()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
 <mat-progress-bar mode="query" *ngIf="!isReady"></mat-progress-bar>
 <div class="container" *ngIf="isReady">
   <p>Vendedor: {{ datosVendedor.name }}</p>

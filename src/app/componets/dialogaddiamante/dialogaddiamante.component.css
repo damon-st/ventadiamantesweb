@@ -1,0 +1,13 @@
+.example-form-field {
+    width: 100%;
+    font-size: 18px;
+}
+.label{
+    font-size: 18px;
+}
+
+.btn-large{
+    width: 150px;
+    display: block;
+    justify-content: center;
+}

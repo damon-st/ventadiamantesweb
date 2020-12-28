@@ -23,6 +23,7 @@ import {AngularFirestoreModule}from '@angular/fire/firestore';
 import {AngularFireStorageModule,BUCKET}from '@angular/fire/storage';
 import { AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
+import { DialogaddiamanteComponent } from './componets/dialogaddiamante/dialogaddiamante.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
     AppComponent,
     ToolbarsComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    DialogaddiamanteComponent
   ],
   imports: [
     BrowserModule,

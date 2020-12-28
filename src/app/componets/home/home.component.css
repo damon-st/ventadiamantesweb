@@ -53,3 +53,10 @@
     height: 30px;
     border-radius: 15px 15px;
 }
+
+.example-button-container {
+    display: block;
+    justify-content: flex-start;
+    width: 120px;
+    float: right;
+  }

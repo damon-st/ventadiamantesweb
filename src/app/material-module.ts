@@ -9,6 +9,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 
 import {MatRadioModule} from '@angular/material/radio';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatButtonModule,
     MatGridListModule,
     MatRadioModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatDialogModule
     ]
 })
 export class MaterialModulesI{}

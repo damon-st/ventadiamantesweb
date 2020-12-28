@@ -1,6 +1,7 @@
 import { formatDate, FormatWidth, getLocaleDateFormat } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { DiamanteI } from 'src/app/models/diamante';
@@ -10,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { DiamantesService } from 'src/app/services/diamantes.service';
 
 import swal from 'sweetalert';
+import { DialogaddiamanteComponent } from '../dialogaddiamante/dialogaddiamante.component';
 
 
 @Component({
@@ -46,7 +48,7 @@ export class HomeComponent implements OnInit {
   };
 
 
-  diamante: DiamanteI = 
+  diamante: DiamanteI[] = 
   [{descripcion:'100 + BONUS 10 DIAMANTES',precio:1.30},
    {descripcion:'200 + BONUS 20 DIAMANTES',precio: 2.60},
    {descripcion:'310 + BONUS 31 DIAMANTES',precio: 3.50},
@@ -68,24 +70,24 @@ export class HomeComponent implements OnInit {
 
   constructor(private auth: AuthService,
     private storage: AngularFireStorage,
-    private diamanteSvc: DiamantesService) { 
+    private diamanteSvc: DiamantesService,
+    private dialog: MatDialog) { 
     
   }
 
   ngOnInit(): void {
    
-    const d = new Date().setDate(10);
-    console.log(d);
-    
+   
     this.fecha += new Date().getFullYear().toString();
     const s = new Date().getMonth() +1;    
     this.fecha += s.toString();
     this.fecha += new Date().getDate().toString();
 
     const numeroVenta = Number.parseFloat(this.fecha);
+    
     this.ventaDiamante.numeroVenta = numeroVenta;
     this.ventaDiamante.colorVendedor = "#333333";
-    this.ventaDiamante.fechaVenta = new Date('2018/01/30 23:30:14').toString();
+    this.ventaDiamante.fechaVenta = this.getDate().toLowerCase();
 
       this.auth.user.subscribe(user =>{
         if(user){
@@ -145,6 +147,15 @@ export class HomeComponent implements OnInit {
 
   addSlide() {
    // this.diamante.push({img: "http://placehold.it/350x150/777777"})
+  const dialogRef =  this.dialog.open(DialogaddiamanteComponent,{
+    data:{descripcion: '', precio: 0}
+  });
+
+  dialogRef.afterClosed().subscribe(resul => {
+    console.log(resul);
+    if(resul) this.diamante.push(resul);
+  });
+
   }
   
   removeSlide() {
@@ -192,6 +203,16 @@ export class HomeComponent implements OnInit {
         swal("Recarga manualmente la pagina");
       }
     });
+    
+  }
+
+
+  getDate(): string{
+    const meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+    const diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+    const  f=new Date();
+    const ampm = (f.getHours() >=12) ? 'p.m.':'a.m.';
+     return diasSemana[f.getDay()] + ", " + f.getDate() + " " + meses[f.getMonth()] + " " + f.getFullYear() + " " + f.getHours()+":" + f.getMinutes()+ " " + ampm;
     
   }
 }
