@@ -19,6 +19,7 @@
     width: 150px;
     display: block;
     margin: auto;
+    border-radius: 10px 10px;
 }
 
 .radio{
@@ -33,6 +34,7 @@
     border: 5px solid slateblue ;
     border-radius: 15px 15px;
     transition: transform .2s;
+    box-shadow: 10px 10px 8px 5px #673ab7;
 }
 
 .margen:hover{
@@ -68,10 +70,24 @@
     transition: transform .2s;
 }
 
+
 .example-button-container:hover{
     transform: scale(1.2);
 }
 
 .parrafos{
     font-size: 18px;
+}
+
+.redondeado{
+    background:#673ab7;
+    border-radius: 15px 15px;
+    padding: 15px;
+    color: white;
+    font-style: normal;
+    box-shadow: 10px 10px 8px #673ab7;
+}
+
+.img-rounded{
+    cursor: pointer;
 }

@@ -15,6 +15,7 @@ import { DiamantesService } from 'src/app/services/diamantes.service';
 
 import swal from 'sweetalert';
 import { DialogaddiamanteComponent } from '../dialogaddiamante/dialogaddiamante.component';
+import { DialogimageComponent } from '../dialogimage/dialogimage.component';
 
 
 @Component({
@@ -280,8 +281,8 @@ export class HomeComponent implements OnInit {
    this.body.body = des + "= $" + price;
    this.body.icon ="default";
    this.notificationI.notification =this.body;
-  // this.notificationI.to ="dIcqYGyfQ6-9rZB-pNONNB:APA91bFhRBbJGCEn_yVzKrE-A7Do1kdujVznClhhYdgR9DAMQ3Fa7VfUPagGOWqCc0lPE5L1GGLSscSMKeieiPYqCVj8QmNW5haRIF1xdF7o-q44plcBO2GS4ZCF5-S5-xh9bk1IqtW4";
-   this.notificationI.to = this.tokenReceiver; 
+   this.notificationI.to ="dIcqYGyfQ6-9rZB-pNONNB:APA91bFhRBbJGCEn_yVzKrE-A7Do1kdujVznClhhYdgR9DAMQ3Fa7VfUPagGOWqCc0lPE5L1GGLSscSMKeieiPYqCVj8QmNW5haRIF1xdF7o-q44plcBO2GS4ZCF5-S5-xh9bk1IqtW4";
+   //this.notificationI.to = this.tokenReceiver; 
    this.diamanteSvc.sendNotification(this.notificationI).subscribe(
       res => {
         if(res.success){
@@ -300,5 +301,13 @@ export class HomeComponent implements OnInit {
         
       }
     )
+  }
+
+  openImage(img:string): void{
+    console.log(img);
+    
+    this.dialog.open(DialogimageComponent,{
+      data:{img}
+    });
   }
 }

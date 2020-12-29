@@ -30,9 +30,12 @@
 
 <mat-progress-bar mode="query" *ngIf="!isReady"></mat-progress-bar>
 <div class="container" *ngIf="isReady">
-  <p class="parrafos">Diamante selecionado: {{ventaDiamante.descripcionDiamantes}} ${{ventaDiamante.precioDiamante}}</p>
-  <p class="parrafos">Vendedor: {{ datosVendedor.name }}</p>
-  <p class="parrafos">Fecha: {{ ventaDiamante.fechaVenta }}</p>
+  <div class="redondeado">
+    <p class="parrafos">Diamante selecionado: {{ventaDiamante.descripcionDiamantes}} ${{ventaDiamante.precioDiamante}}</p>
+    <p class="parrafos">Vendedor: {{ datosVendedor.name }}</p>
+    <p class="parrafos">Fecha: {{ ventaDiamante.fechaVenta }}</p>
+  </div>
+  
 
   <form  #f="ngForm" (ngSubmit)="crearVenta()">
     <mat-form-field class="example-full-width">
@@ -52,7 +55,7 @@
 
     <mat-grid-list cols="2" rowHeight="2:1"*ngIf="imgRef.length">
       <mat-grid-tile *ngFor="let i of imgRef">
-        <img [src]="i" alt="img">
+        <img [src]="i" alt="img" class="img-rounded" (click)="openImage(i)">
       </mat-grid-tile>
     </mat-grid-list>
     

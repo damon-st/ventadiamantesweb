@@ -26,6 +26,7 @@ import { AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import { DialogaddiamanteComponent } from './componets/dialogaddiamante/dialogaddiamante.component';
 import {AngularFireMessagingModule} from '@angular/fire/messaging';
+import { DialogimageComponent } from './componets/dialogimage/dialogimage.component';
  
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {AngularFireMessagingModule} from '@angular/fire/messaging';
     ToolbarsComponent,
     LoginComponent,
     HomeComponent,
-    DialogaddiamanteComponent
+    DialogaddiamanteComponent,
+    DialogimageComponent
   ],
   imports: [
     BrowserModule,
