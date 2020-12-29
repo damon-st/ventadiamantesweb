@@ -2,9 +2,12 @@ import { formatDate, FormatWidth, getLocaleDateFormat } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { DiamanteI } from 'src/app/models/diamante';
+import { NotificationI,NotI } from 'src/app/models/notification';
+import { TokensI } from 'src/app/models/tokens';
 import { UserDataI } from 'src/app/models/users';
 import { ImagesRef, VentaI } from 'src/app/models/venta';
 import { AuthService } from 'src/app/services/auth.service';
@@ -22,6 +25,7 @@ import { DialogaddiamanteComponent } from '../dialogaddiamante/dialogaddiamante.
 export class HomeComponent implements OnInit {
 
 
+  notificationI: NotificationI = {notification: null,to: ''};
   datosUsuario: UserDataI[] = [];
   
   datosVendedor: UserDataI;
@@ -32,6 +36,9 @@ export class HomeComponent implements OnInit {
   valorSubidaImg: number =0;
   fecha: any = "";
   urlImage: Observable<string>;
+
+  uidReceiver: string;
+  tokenReceiver: string;
 
   ventaDiamante: VentaI = {
     colorValorPorVenta: '',
@@ -47,6 +54,7 @@ export class HomeComponent implements OnInit {
     vendedorUID: '',
   };
 
+  tokens: TokensI[] = [];
 
   diamante: DiamanteI[] = 
   [{descripcion:'100 + BONUS 10 DIAMANTES',precio:1.30},
@@ -68,15 +76,17 @@ export class HomeComponent implements OnInit {
 
    @ViewChild('imageFiles') imageFiles: ElementRef;
 
-  constructor(public auth: AuthService,
+  constructor(private auth: AuthService,
     private storage: AngularFireStorage,
-    private diamanteSvc: DiamantesService,
-    private dialog: MatDialog) { 
+    public diamanteSvc: DiamantesService,
+    private dialog: MatDialog,
+    private _snackBar : MatSnackBar) { 
     
   }
 
   ngOnInit(): void {
    
+    this.auth.requestPermission();
    
     this.fecha += new Date().getFullYear().toString();
     const s = new Date().getMonth() +1;    
@@ -105,10 +115,29 @@ export class HomeComponent implements OnInit {
 
                     this.datosVendedor = {uid: s.uid,email: s.email,device_token:s.device_token,name:s.name};
                  
+                  }else{
+                    this.uidReceiver = s.uid;
                   }
               });
               this.ventaDiamante.vendedorName = this.datosVendedor.name;
               this.ventaDiamante.vendedorUID = this.datosVendedor.uid;
+              this.auth.getToken().subscribe(res =>{
+                 res.forEach(elem =>{
+                  let x = elem.payload.toJSON();
+                  x['$key'] = elem.key;
+                  this.tokens.push(x as TokensI);
+
+                  
+                 });
+                 this.tokens.forEach(e =>{
+                  if(e.$key === this.uidReceiver){
+                    this.tokenReceiver = e.token;
+                  }
+                    
+                });
+              });              
+            
+              
             }
           )
         }
@@ -219,10 +248,12 @@ export class HomeComponent implements OnInit {
     .then((willDelete) => {
       if (willDelete) {
        //window.location.reload();
+         this.sendNotification(this.ventaDiamante.descripcionDiamantes,this.ventaDiamante.precioDiamante);
          this.valorSubidaImg= 0;
          this.imgRef = [];
          this.imageFiles.nativeElement.value = '';
          this.ventaDiamante.image = [];
+         
       } else {
         swal("Recarga manualmente la pagina");
       }
@@ -241,5 +272,33 @@ export class HomeComponent implements OnInit {
     const ampm = (f.getHours() >=12) ? 'p.m.':'a.m.';
      return diasSemana[f.getDay()] + ", " + f.getDate() + " " + meses[f.getMonth()] + " " + f.getFullYear() + " " + f.getHours()+":" + f.getMinutes()+ " " + ampm;
     
+  }
+
+  body: NotI = {title: '',body: '', icon:''};
+  sendNotification(des: string,price: number){
+   this.body.title ='Nueva Venta';
+   this.body.body = des + "= $" + price;
+   this.body.icon ="default";
+   this.notificationI.notification =this.body;
+  // this.notificationI.to ="dIcqYGyfQ6-9rZB-pNONNB:APA91bFhRBbJGCEn_yVzKrE-A7Do1kdujVznClhhYdgR9DAMQ3Fa7VfUPagGOWqCc0lPE5L1GGLSscSMKeieiPYqCVj8QmNW5haRIF1xdF7o-q44plcBO2GS4ZCF5-S5-xh9bk1IqtW4";
+   this.notificationI.to = this.tokenReceiver; 
+   this.diamanteSvc.sendNotification(this.notificationI).subscribe(
+      res => {
+        if(res.success){
+          this._snackBar.open("Exito al enviar notificacion","ok",{
+            duration: 3000
+          });
+        }else{
+          this._snackBar.open("Error al enviar la notificacion :(","ok",{
+            duration: 3000
+          });
+        }
+        
+      },
+      err =>{
+        console.log("error "+err);
+        
+      }
+    )
   }
 }

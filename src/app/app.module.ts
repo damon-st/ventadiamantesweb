@@ -10,6 +10,7 @@ import { ToolbarsComponent } from './componets/toolbars/toolbars.component';
 import { LoginComponent } from './componets/login/login.component';
 import { MaterialModulesI } from './material-module';
 
+import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {ReactiveFormsModule} from '@angular/forms';
 import { HomeComponent } from './componets/home/home.component';
@@ -47,7 +48,8 @@ import {AngularFireMessagingModule} from '@angular/fire/messaging';
     AngularFireStorageModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    AngularFireMessagingModule
+    AngularFireMessagingModule,
+    HttpClientModule
     
   ],
   providers: [{provide:BUCKET,useValue:'gs://ventadiamantes-329aa.appspot.com'},AuthService,DiamantesService],

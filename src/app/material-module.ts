@@ -10,6 +10,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatGridListModule,
     MatRadioModule,
     MatProgressBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule
     ]
 })
 export class MaterialModulesI{}

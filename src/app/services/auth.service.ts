@@ -68,6 +68,12 @@ export class AuthService {
     this.afMessaging.onMessage((payload)=>{
       console.log("Message received", payload);
       this.currentMessage.next(payload);
-    })
+    });
+
+    
+  }
+
+  public getToken(){
+    return this.database.list('Tokens').snapshotChanges();
   }
 }
