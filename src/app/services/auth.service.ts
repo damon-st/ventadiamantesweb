@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireMessaging } from '@angular/fire/messaging';
 import firebase from 'firebase/app';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, mergeMapTo } from 'rxjs/operators';
+import {  BehaviorSubject} from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +14,14 @@ import { map } from 'rxjs/operators';
 export class AuthService {
 
 
+  currentMessage = new BehaviorSubject(null); 
+
+
   isLoadin:boolean = false;
   public user: Observable<firebase.User>;
   constructor(private auth: AngularFireAuth,
-      private database: AngularFireDatabase) { 
+      private database: AngularFireDatabase,
+      private afMessaging: AngularFireMessaging) { 
     this.user = this.auth.authState;
   }
 
@@ -47,4 +54,20 @@ export class AuthService {
     return this.database.list('Users');
   }
 
+  public requestPermission(){
+    this.afMessaging.requestPermission
+    .pipe(mergeMapTo(this.afMessaging.tokenChanges))
+    .subscribe(token =>{
+      console.log(token);
+      
+    },err => {console.log(err);
+    });
+  }
+
+  public resiveMessage(){
+    this.afMessaging.onMessage((payload)=>{
+      console.log("Message received", payload);
+      this.currentMessage.next(payload);
+    })
+  }
 }

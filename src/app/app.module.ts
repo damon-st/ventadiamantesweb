@@ -24,8 +24,8 @@ import {AngularFireStorageModule,BUCKET}from '@angular/fire/storage';
 import { AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import { DialogaddiamanteComponent } from './componets/dialogaddiamante/dialogaddiamante.component';
-
-
+import {AngularFireMessagingModule} from '@angular/fire/messaging';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +46,8 @@ import { DialogaddiamanteComponent } from './componets/dialogaddiamante/dialogad
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireMessagingModule
     
   ],
   providers: [{provide:BUCKET,useValue:'gs://ventadiamantes-329aa.appspot.com'},AuthService,DiamantesService],

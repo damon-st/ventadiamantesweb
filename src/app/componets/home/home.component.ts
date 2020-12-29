@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
 
    @ViewChild('imageFiles') imageFiles: ElementRef;
 
-  constructor(private auth: AuthService,
+  constructor(public auth: AuthService,
     private storage: AngularFireStorage,
     private diamanteSvc: DiamantesService,
     private dialog: MatDialog) { 
@@ -112,7 +112,15 @@ export class HomeComponent implements OnInit {
             }
           )
         }
-      });            
+      });  
+      
+      this.auth.resiveMessage();
+      const msg  = this.auth.currentMessage;
+      msg.subscribe(s =>{
+        console.log(s);
+        
+      })
+      
   }
 
   recuperarSelecion(diam: any){
