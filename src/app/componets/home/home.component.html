@@ -54,8 +54,14 @@
 
 
     <mat-grid-list cols="2" rowHeight="2:1"*ngIf="imgRef.length">
-      <mat-grid-tile *ngFor="let i of imgRef">
-        <img [src]="i" alt="img" class="img-rounded" (click)="openImage(i)">
+      <mat-grid-tile *ngFor="let i of imgRef; let indie=index">
+        <div>
+          <button type="button" mat-fab color="warn" (click)="deleteImage(i,indie)" >
+            <mat-icon>delete</mat-icon>
+          </button>
+          <img [src]="i" alt="img" class="img-rounded" (click)="openImage(i)" width="250">
+        </div>
+        
       </mat-grid-tile>
     </mat-grid-list>
     

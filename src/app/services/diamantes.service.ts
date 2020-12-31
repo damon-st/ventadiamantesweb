@@ -6,6 +6,7 @@ import {HttpClient, HttpEvent, HttpHandler, HttpHeaders, HttpRequest} from '@ang
 import { Url } from '../models/url';
 import { Observable } from 'rxjs';
 import { NotificationI } from '../models/notification';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 
 @Injectable({
@@ -15,7 +16,8 @@ export class DiamantesService {
 
   url:string;
   constructor(private dtf : AngularFireDatabase,
-    private http: HttpClient) { 
+    private http: HttpClient,
+    private storage: AngularFireStorage) { 
       this.url = Url.url;
     }
 
@@ -53,5 +55,11 @@ export class DiamantesService {
 
 
   }
+
+  public deleteImageDB(url: string){
+   return this.storage.refFromURL(url).delete();
+  }
+
+
 
 }

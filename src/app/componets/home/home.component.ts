@@ -230,6 +230,7 @@ export class HomeComponent implements OnInit {
   cambio(){
     this.valorSubidaImg = 100;
     this.imgRef.push(this.imageFiles.nativeElement.value);
+    this.imgFile.nativeElement.value = '';
   }
 
   crearVenta(){
@@ -258,6 +259,7 @@ export class HomeComponent implements OnInit {
          this.ventaDiamante.image = [];
          this.idJugador.nativeElement.value = '';
          this.imgFile.nativeElement.value = '';
+         this.ventaDiamante.fechaVenta = this.getDate().toLowerCase();
       } else {
         swal("Recarga manualmente la pagina");
       }
@@ -311,6 +313,15 @@ export class HomeComponent implements OnInit {
     
     this.dialog.open(DialogimageComponent,{
       data:{img}
+    });
+  }
+
+  deleteImage(img: string, index: any): void{
+    this.diamanteSvc.deleteImageDB(img).subscribe(res => {
+      this.imgRef.splice(index,1);
+    },
+    err => {
+      swal('Error', `Algo sali mal al eliminar la imagen${err}`, 'error');
     });
   }
 }
