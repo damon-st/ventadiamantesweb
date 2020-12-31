@@ -91,3 +91,11 @@
 .img-rounded{
     cursor: pointer;
 }
+
+.form-content{
+    margin-top: 15px;
+}
+
+.aria-label{
+    font-size: 18px;
+}

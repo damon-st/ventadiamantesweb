@@ -37,17 +37,17 @@
   </div>
   
 
-  <form  #f="ngForm" (ngSubmit)="crearVenta()">
+  <form class="form-content" #f="ngForm" (ngSubmit)="crearVenta()">
     <mat-form-field class="example-full-width">
-      <mat-label>Escribe aqui el id del jugador</mat-label>
-      <input matInput #message maxlength="256" minlength="4" placeholder="" name="descripcion" [(ngModel)]="ventaDiamante.descripcion" required/>
+      <mat-label class="aria-label">Escribe aqui el id del jugador</mat-label>
+      <input matInput #idjugador maxlength="256" minlength="4" placeholder="" name="descripcion" [(ngModel)]="ventaDiamante.descripcion" required/>
       <mat-hint align="start"><strong>no olvidar</strong> </mat-hint>
-      <mat-hint align="end">{{ message.value.length }} / 256</mat-hint>
+      <mat-hint align="end">{{ idjugador.value.length }} / 256</mat-hint>
     </mat-form-field>
 
 
     <mat-label>Selecciona las imagenes</mat-label>
-    <input type="file" (change)="recuperarDirImages($event)" accept=".png, .jpg, .jpeg">
+    <input #imgFile type="file" (change)="recuperarDirImages($event)" accept=".png, .jpg, .jpeg">
     <br>
     <input #imageFiles type="hidden" [value]="urlImage | async"/>
     <mat-progress-bar mode="determinate" [value]="valorSubidaImg" class="progress"></mat-progress-bar>

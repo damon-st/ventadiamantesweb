@@ -76,6 +76,8 @@ export class HomeComponent implements OnInit {
 
 
    @ViewChild('imageFiles') imageFiles: ElementRef;
+   @ViewChild('idjugador') idJugador:ElementRef;
+   @ViewChild('imgFile') imgFile: ElementRef;
 
   constructor(private auth: AuthService,
     private storage: AngularFireStorage,
@@ -254,7 +256,8 @@ export class HomeComponent implements OnInit {
          this.imgRef = [];
          this.imageFiles.nativeElement.value = '';
          this.ventaDiamante.image = [];
-         
+         this.idJugador.nativeElement.value = '';
+         this.imgFile.nativeElement.value = '';
       } else {
         swal("Recarga manualmente la pagina");
       }

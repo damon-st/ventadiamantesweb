@@ -58,7 +58,7 @@ export class AuthService {
     this.afMessaging.requestPermission
     .pipe(mergeMapTo(this.afMessaging.tokenChanges))
     .subscribe(token =>{
-      console.log(token);
+      console.log("success");
       
     },err => {console.log(err);
     });

@@ -46,7 +46,7 @@ export class DiamantesService {
     //headers.append('Content-Type','application/json');
 
     const body = JSON.stringify(not);
-    console.log(body);
+   // console.log(body);
     
 
    return this.http.post(this.url,body,{headers: headers});
