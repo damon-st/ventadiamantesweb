@@ -100,7 +100,7 @@ export class HomeComponent implements OnInit {
     
     this.ventaDiamante.numeroVenta = numeroVenta;
     this.ventaDiamante.colorVendedor = "#333333";
-    this.ventaDiamante.fechaVenta = this.getDate().toLowerCase();
+    this.updateDate();
 
       this.auth.user.subscribe(user =>{
         if(user){
@@ -146,12 +146,11 @@ export class HomeComponent implements OnInit {
         }
       });  
       
-      this.auth.resiveMessage();
-      const msg  = this.auth.currentMessage;
-      msg.subscribe(s =>{
-        console.log(s);
-        
-      })
+      setInterval(() =>{
+          this.updateDate();
+          console.log("updatedate");
+          
+      },60000*1);
       
   }
 
@@ -259,7 +258,7 @@ export class HomeComponent implements OnInit {
          this.ventaDiamante.image = [];
          this.idJugador.nativeElement.value = '';
          this.imgFile.nativeElement.value = '';
-         this.ventaDiamante.fechaVenta = this.getDate().toLowerCase();
+         this.updateDate();
       } else {
         swal("Recarga manualmente la pagina");
       }
@@ -268,6 +267,11 @@ export class HomeComponent implements OnInit {
 
  
     
+  }
+
+
+  updateDate() {
+    this.ventaDiamante.fechaVenta = this.getDate().toLowerCase();
   }
 
 
