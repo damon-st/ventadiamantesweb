@@ -167,6 +167,7 @@ export class HomeComponent implements OnInit {
     const file = e.target.files[0];    
     if(file !==null){
       const size = file.size;
+      
       if(size >= 1000){
         this.valorSubidaImg = 10;
         const  id = Math.random().toString(36).substring(2);
