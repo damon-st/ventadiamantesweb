@@ -91,14 +91,9 @@ export class HomeComponent implements OnInit {
    
     this.auth.requestPermission();
    
-    this.fecha += new Date().getFullYear().toString();
-    const s = new Date().getMonth() +1;    
-    this.fecha += s.toString();
-    this.fecha += new Date().getDate().toString();
-
-    const numeroVenta = Number.parseFloat(this.fecha);
+    this.getNumeroVenta();
     
-    this.ventaDiamante.numeroVenta = numeroVenta;
+    
     this.ventaDiamante.colorVendedor = "#333333";
     this.updateDate();
 
@@ -152,6 +147,25 @@ export class HomeComponent implements OnInit {
           
       },60000*1);
       
+  }
+
+  getNumeroVenta(){
+
+    const dias = new Array('00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31');
+    const mes = new Array('01','02','03','04','05','06','07','08','09','10','11','12');
+
+
+    this.fecha += new Date().getFullYear().toString();
+    const s =  mes[new Date().getMonth()];    
+    this.fecha += s.toString();
+    this.fecha += dias[new Date().getDate().toString()];
+
+    const numeroVenta = Number.parseFloat(this.fecha);
+
+    console.log(numeroVenta);
+
+    this.ventaDiamante.numeroVenta = numeroVenta;
+
   }
 
   recuperarSelecion(diam: any){
