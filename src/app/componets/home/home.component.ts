@@ -279,9 +279,10 @@ export class HomeComponent implements OnInit {
   getDate(): string{
     const meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
     const diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+    const dias = new Array('00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31');
     const  f=new Date();
     const ampm = (f.getHours() >=12) ? 'p.m.':'a.m.';
-     return diasSemana[f.getDay()] + ", " + f.getDate() + " " + meses[f.getMonth()] + " " + f.getFullYear() + " " + f.getHours()+":" + f.getMinutes()+ " " + ampm;
+     return diasSemana[f.getDay()] + ", " + dias[f.getDate()] + " " + meses[f.getMonth()] + " " + f.getFullYear() + " " + f.getHours()+":" + f.getMinutes()+ " " + ampm;
     
   }
 
