@@ -176,30 +176,40 @@ export class HomeComponent implements OnInit {
     
   }
 
-
+  isUpload:boolean = false;
   recuperarDirImages(e : any){
-    const file = e.target.files[0];    
-    if(file !==null){
-      const size = file.size;
-      
-      if(size >= 1000){
+    const file = e.target.files;    
+    if(file !==null && file.length > 0){
+     
+      for(let i =0; i<file.length ; i++ ){
+        const files = file[i];
+        const size = files.size;
+
+        
+         if(size >= 1000){
         this.valorSubidaImg = 10;
         const  id = Math.random().toString(36).substring(2);
         const filePath = `eliminar/${id}`;
         const ref = this.storage.ref(filePath);
-        const task = this.storage.upload(filePath,file);
+        const task = this.storage.upload(filePath,files);
     
         task.snapshotChanges()
         .pipe(finalize(() =>{
-            this.urlImage = ref.getDownloadURL();        
+          ref.getDownloadURL().subscribe((url)=>{
+            this.imgRef = this.imgRef.concat([url]);
             this.valorSubidaImg = 75;
+
+          });
+           // this.urlImage = ref.getDownloadURL();        
             setTimeout(() => {
               this.cambio();
             }, 1000);
         })).subscribe();
     
         
+       }
       }
+      
      
     }
 
@@ -243,8 +253,9 @@ export class HomeComponent implements OnInit {
 
   cambio(){
     this.valorSubidaImg = 100;
-    this.imgRef.push(this.imageFiles.nativeElement.value);
+    // this.imgRef.push(this.imageFiles.nativeElement.value);
     this.imgFile.nativeElement.value = '';
+    this.valorSubidaImg = 0;
   }
 
   crearVenta(){

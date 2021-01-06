@@ -47,7 +47,7 @@
 
 
     <mat-label>Selecciona las imagenes</mat-label>
-    <input #imgFile type="file" (change)="recuperarDirImages($event)" accept=".png, .jpg, .jpeg">
+    <input #imgFile type="file" (change)="recuperarDirImages($event)" accept=".png, .jpg, .jpeg" multiple>
     <br>
     <input #imageFiles type="hidden" [value]="urlImage | async"/>
     <mat-progress-bar mode="determinate" [value]="valorSubidaImg" class="progress"></mat-progress-bar>
