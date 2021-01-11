@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Route, Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { DiamanteI } from 'src/app/models/diamante';
@@ -83,12 +84,19 @@ export class HomeComponent implements OnInit {
     private storage: AngularFireStorage,
     public diamanteSvc: DiamantesService,
     private dialog: MatDialog,
-    private _snackBar : MatSnackBar) { 
+    private _snackBar : MatSnackBar,
+    private route:Router) { 
     
   }
 
   ngOnInit(): void {
    
+
+   
+
+    this.route.navigateByUrl
+
+
     this.auth.requestPermission();
    
     this.getNumeroVenta();
@@ -325,6 +333,8 @@ export class HomeComponent implements OnInit {
           this._snackBar.open("Exito al enviar notificacion","ok",{
             duration: 3000
           });
+          window.open('https://api.whatsapp.com/send?phone=593984334637&text=Ahorita,%20hice%20una%20recargar%20'+'de%20' + '$%20'+ this.ventaDiamante.precioDiamante+'%20','_blank');
+
         }else{
           this._snackBar.open("Error al enviar la notificacion :(","ok",{
             duration: 3000
