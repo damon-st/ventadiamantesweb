@@ -12,7 +12,13 @@
     <input matInput type="number" [(ngModel)]="data.precio">
 </mat-form-field>
 
+<mat-label class="example-form-field" *ngIf="isEmpty">
+<mat-error class="error text-center">
+  Porfavor llena los campos
+</mat-error>
+</mat-label>
+
 <div mat-dialog-actions>
-    <button mat-raised-button (click)="onNoClick()" color="warn" class="btn-large">Cancelar</button>
-    <button mat-raised-button [mat-dialog-close]="data" cdkFocusInitial color="primary" class="btn-large">Confirmar</button>
-  </div>
+    <button mat-raised-button [mat-dialog-close] color="warn" class="btn-large">Cancelar</button>
+    <button mat-raised-button (click)="onNoClick(data)" cdkFocusInitial color="primary" class="btn-large">Confirmar</button>
+</div>

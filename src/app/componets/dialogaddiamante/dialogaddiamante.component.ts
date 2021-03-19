@@ -10,6 +10,7 @@ import { DiamanteI } from 'src/app/models/diamante';
 export class DialogaddiamanteComponent implements OnInit {
 
   value = '';
+  isEmpty: boolean = false;
   constructor(private matDialogRef: MatDialogRef<DialogaddiamanteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DiamanteI) { }
 
@@ -17,7 +18,12 @@ export class DialogaddiamanteComponent implements OnInit {
   }
 
 
-  onNoClick(): void{
-    this.matDialogRef.close();
+  onNoClick(data: DiamanteI): void{
+    if(data.descripcion === '' || data.precio === 0){
+      this.isEmpty = true;
+    }else{
+      this.isEmpty = false;
+      this.matDialogRef.close(data);
+    }
   }
 }

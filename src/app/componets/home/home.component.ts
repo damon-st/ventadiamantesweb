@@ -1,3 +1,4 @@
+import { MediaMatcher } from '@angular/cdk/layout';
 import { formatDate, FormatWidth, getLocaleDateFormat } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -6,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Route, Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { FileDetector } from 'selenium-webdriver';
 import { DiamanteI } from 'src/app/models/diamante';
 import { NotificationI,NotI } from 'src/app/models/notification';
 import { TokensI } from 'src/app/models/tokens';
@@ -75,6 +77,7 @@ export class HomeComponent implements OnInit {
 
    slideConfig={"slidesToShow":4,"slidesToScroll": 4};
 
+   mediaQueryList: MediaQueryList;
 
    @ViewChild('imageFiles') imageFiles: ElementRef;
    @ViewChild('idjugador') idJugador:ElementRef;
@@ -85,14 +88,18 @@ export class HomeComponent implements OnInit {
     public diamanteSvc: DiamantesService,
     private dialog: MatDialog,
     private _snackBar : MatSnackBar,
-    private route:Router) { 
-    
+    private route:Router,
+    private mediaMatcher: MediaMatcher) { 
+    this.mediaQueryList = mediaMatcher.matchMedia('(max-width: 500px)');
   }
 
   ngOnInit(): void {
    
+    if(this.mediaQueryList.matches){
+      this.slideConfig={"slidesToShow":1,"slidesToScroll": 1};
 
-   
+    }
+  
 
     this.route.navigateByUrl
 
@@ -181,6 +188,7 @@ export class HomeComponent implements OnInit {
     this.ventaDiamante.precioDiamante = precio; 
     this.ventaDiamante.descripcionDiamantes = descripcion;
     console.log(this.ventaDiamante);
+  
     
   }
 
@@ -192,8 +200,7 @@ export class HomeComponent implements OnInit {
       for(let i =0; i<file.length ; i++ ){
         const files = file[i];
         const size = files.size;
-
-        
+              
          if(size >= 1000){
         this.valorSubidaImg = 10;
         const  id = Math.random().toString(36).substring(2);
@@ -216,6 +223,7 @@ export class HomeComponent implements OnInit {
     
         
        }
+
       }
       
      
@@ -232,7 +240,6 @@ export class HomeComponent implements OnInit {
   });
 
   dialogRef.afterClosed().subscribe(resul => {
-    console.log(resul);
     if(resul) this.diamante.push(resul);
   });
 
@@ -269,7 +276,10 @@ export class HomeComponent implements OnInit {
   crearVenta(){
     //this.imgRef.push(this.imageFiles.nativeElement.value);
 
-    if(this.ventaDiamante.descripcionDiamantes === ''){
+    if(this.ventaDiamante.descripcionDiamantes === '' || 
+      this.idJugador.nativeElement.value === ''||
+      this.idJugador.nativeElement.value === ' '||
+      this.imgRef.length < 1){
       swal('Error','Por favor seleciona el diamante vendido', 'error');
     }else{
          console.log(this.ventaDiamante);

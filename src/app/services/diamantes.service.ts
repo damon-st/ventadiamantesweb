@@ -17,7 +17,9 @@ export class DiamantesService {
   url:string;
   constructor(private dtf : AngularFireDatabase,
     private http: HttpClient,
-    private storage: AngularFireStorage) { 
+    private storage: AngularFireStorage,
+   
+    ) { 
       this.url = Url.url;
     }
 
@@ -60,6 +62,11 @@ export class DiamantesService {
    return this.storage.refFromURL(url).delete();
   }
 
-
-
+  public delteImage(path: any): void{
+    this.storage.refFromURL(path).delete().subscribe(res => {
+      console.log('exito');
+      
+    },error => console.log(error)
+    )
+  }
 }

@@ -51,7 +51,8 @@ import { DialogimageComponent } from './componets/dialogimage/dialogimage.compon
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFireMessagingModule,
-    HttpClientModule
+    HttpClientModule,
+    
     
   ],
   providers: [{provide:BUCKET,useValue:'gs://ventadiamantes-329aa.appspot.com'},AuthService,DiamantesService],

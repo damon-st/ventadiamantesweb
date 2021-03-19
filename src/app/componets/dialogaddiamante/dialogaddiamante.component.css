@@ -11,3 +11,12 @@
     display: block;
     justify-content: center;
 }
+
+@media only screen and (max-width: 500px){
+    .btn-large{
+        width: 100%;
+        display: inline-block;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+}
