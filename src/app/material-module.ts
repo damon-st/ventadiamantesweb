@@ -11,6 +11,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatRadioModule,
     MatProgressBarModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    DragDropModule
     ]
 })
 export class MaterialModulesI{}

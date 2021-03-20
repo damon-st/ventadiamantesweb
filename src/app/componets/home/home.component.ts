@@ -20,6 +20,7 @@ import swal from 'sweetalert';
 import { DialogaddiamanteComponent } from '../dialogaddiamante/dialogaddiamante.component';
 import { DialogimageComponent } from '../dialogimage/dialogimage.component';
 
+import {CdkDragDrop,moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-home',
@@ -162,6 +163,10 @@ export class HomeComponent implements OnInit {
           
       },60000*1);
       
+  }
+
+  drop(event: CdkDragDrop<ImagesRef[]>){
+    moveItemInArray(this.imgRef,event.previousIndex,event.currentIndex);
   }
 
   getNumeroVenta(){
