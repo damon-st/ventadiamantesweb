@@ -40,7 +40,7 @@
   <form class="form-content" #f="ngForm" (ngSubmit)="crearVenta()">
     <mat-form-field class="example-full-width">
       <mat-label class="aria-label">Escribe aqui el id del jugador</mat-label>
-      <input matInput #idjugador maxlength="256" minlength="4" placeholder="" name="descripcion" [(ngModel)]="ventaDiamante.descripcion" required/>
+      <input matInput #idjugador maxlength="256" minlength="4" placeholder="" name="descripcion" [(ngModel)]="ventaDiamante.descripcion" pattern="[a-zA-Z0-9 ]*" required/>
       <mat-hint align="start"><strong>no olvidar</strong> </mat-hint>
       <mat-hint align="end">{{ idjugador.value.length }} / 256</mat-hint>
     </mat-form-field>

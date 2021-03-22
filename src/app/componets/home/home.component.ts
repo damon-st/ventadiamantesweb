@@ -281,37 +281,42 @@ export class HomeComponent implements OnInit {
   crearVenta(){
     //this.imgRef.push(this.imageFiles.nativeElement.value);
 
-    if(this.ventaDiamante.descripcionDiamantes === '' || 
-      this.idJugador.nativeElement.value === ''||
-      this.idJugador.nativeElement.value === ' '||
-      this.imgRef.length < 1){
+    if(this.ventaDiamante.descripcionDiamantes === ''){
       swal('Error','Por favor seleciona el diamante vendido', 'error');
+
+    }else if( this.idJugador.nativeElement.value === ''||
+    this.idJugador.nativeElement.value === ' '){
+      swal('Error','Por favor escribe el id del jugador', 'error');
+
+    }else if( this.imgRef.length < 1){
+       swal('Error','Por favor sube una imagen como minimo', 'error');
     }else{
-         console.log(this.ventaDiamante);
-    this.ventaDiamante.image.push(...this.imgRef);
-    this.diamanteSvc.uploadVenta(this.ventaDiamante);
-    swal({
-      title: "Exito",
-      text: "Se a creado la venta exitosamente recargare la pagina :D",
-      icon: "success",
-      buttons: ['cancelar','nueva recargar'],
-      dangerMode: true,
-    })
-    .then((willDelete) => {
-      if (willDelete) {
-       //window.location.reload();
-         this.sendNotification(this.ventaDiamante.descripcionDiamantes,this.ventaDiamante.precioDiamante);
-         this.valorSubidaImg= 0;
-         this.imgRef = [];
-         this.imageFiles.nativeElement.value = '';
-         this.ventaDiamante.image = [];
-         this.idJugador.nativeElement.value = '';
-         this.imgFile.nativeElement.value = '';
-         this.updateDate();
-      } else {
-        swal("Recarga manualmente la pagina");
-      }
-    });
+      console.log(this.ventaDiamante);
+      this.ventaDiamante.image.push(...this.imgRef);
+      this.diamanteSvc.uploadVenta(this.ventaDiamante);
+      swal({
+        closeOnClickOutside: false,
+        title: "Exito",
+        text: "Se a creado la venta exitosamente recargare la pagina :D",
+        icon: "success",
+        buttons: ['cancelar','nueva recargar'],
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+         //window.location.reload();
+           this.sendNotification(this.ventaDiamante.descripcionDiamantes,this.ventaDiamante.precioDiamante);
+           this.valorSubidaImg= 0;
+           this.imgRef = [];
+           this.imageFiles.nativeElement.value = '';
+           this.ventaDiamante.image = [];
+           this.idJugador.nativeElement.value = '';
+           this.imgFile.nativeElement.value = '';
+           this.updateDate();
+        } else {
+          swal("Recarga manualmente la pagina");
+        }
+      });
     }
 
  

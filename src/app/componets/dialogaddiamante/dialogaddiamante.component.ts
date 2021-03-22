@@ -12,7 +12,9 @@ export class DialogaddiamanteComponent implements OnInit {
   value = '';
   isEmpty: boolean = false;
   constructor(private matDialogRef: MatDialogRef<DialogaddiamanteComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DiamanteI) { }
+    @Inject(MAT_DIALOG_DATA) public data: DiamanteI) {
+      matDialogRef.disableClose = true;
+     }
 
   ngOnInit(): void {
   }
