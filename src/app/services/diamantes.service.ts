@@ -7,6 +7,7 @@ import { Url } from '../models/url';
 import { Observable } from 'rxjs';
 import { NotificationI } from '../models/notification';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { DiamanteI } from '../models/diamante';
 
 
 @Injectable({
@@ -68,5 +69,25 @@ export class DiamantesService {
       
     },error => console.log(error)
     )
+  }
+
+  public getPrices(){
+    return this.dtf.list('Precios').valueChanges();
+  }
+
+  public async crearPrecio(price: DiamanteI){
+    const key = await this.dtf.list('Precios').push(price).key;
+   
+   return this.dtf.list('Precios').update(key, {
+      id: key
+    });
+  }
+
+  public updatePrice(price: DiamanteI){
+    return this.dtf.list('Precios').update(price.id,price);
+  }
+
+  public deletePrice(price: DiamanteI){
+    return this.dtf.list('Precios').remove(price.id);
   }
 }

@@ -10,14 +10,20 @@
   <div ngxSlickItem class="slide margen" *ngFor="let dia of diamante">
     <img src="assets/img/diamante.jpg" alt="imagen" class="imgDiamante" />
 
-    <p class="text-center">{{ dia.descripcion }}</p>
-    <p class="text-center">$ {{ dia.precio }}</p>
+    <p class="text-center">{{ dia.diamantes }}</p>
+    <p class="text-center">$ {{ dia.valor }}</p>
 
     <div class="radio">
       <mat-radio-button [value]="" (change)="recuperarSelecion(dia)"
         >Seleccion</mat-radio-button
       >
     </div>
+    <div class="edit" >
+      <p class="edit-icon" (click)="editPrice(dia)"><mat-icon >edit</mat-icon></p>
+      <p class="delete-icon" (click)="deletePrice(dia)"><mat-icon>delete</mat-icon></p>
+      
+    </div>
+ 
   </div>
 </ngx-slick-carousel>
 

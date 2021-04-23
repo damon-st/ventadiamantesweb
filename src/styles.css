@@ -2,3 +2,48 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.edit{
+  
+    display: grid;
+    justify-content: center;
+    grid-template-columns: auto auto;
+    color: #673ab7;
+    grid-column-gap: 20px;
+    margin-top: 10px;
+}
+.edit-icon{
+    
+    cursor: pointer;
+    grid-column: 100px;
+}
+
+.delete-icon{
+    cursor: pointer;
+    color: red;
+ 
+}
+
+
+.example-form-field {
+    width: 100%;
+    font-size: 18px;
+}
+.label{
+    font-size: 18px;
+}
+
+.btn-large{
+    width: 150px;
+    display: block;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 500px){
+    .btn-large{
+        width: 100%;
+        display: inline-block;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+}

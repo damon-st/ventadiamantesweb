@@ -21,6 +21,7 @@ import { DialogaddiamanteComponent } from '../dialogaddiamante/dialogaddiamante.
 import { DialogimageComponent } from '../dialogimage/dialogimage.component';
 
 import {CdkDragDrop,moveItemInArray} from '@angular/cdk/drag-drop';
+import { EdtipriceComponent } from '../edtiprice/edtiprice.component';
 
 @Component({
   selector: 'app-home',
@@ -61,19 +62,19 @@ export class HomeComponent implements OnInit {
 
   tokens: TokensI[] = [];
 
-  diamante: DiamanteI[] = 
-  [{descripcion:'100 + BONUS 10 DIAMANTES',precio:1.30},
-   {descripcion:'200 + BONUS 20 DIAMANTES',precio: 2.60},
-   {descripcion:'310 + BONUS 31 DIAMANTES',precio: 3.50},
-   {descripcion:'520 + BONUS 52 DIAMANTES',precio: 5.25},
-   {descripcion:'620 + BONUS 62 DIAMANTES',precio: 6.75},
-   {descripcion:'825 + BONUS 88 DIAMANTES',precio: 8.85},
-   {descripcion:'1060 + BONUS 106 DIAMANTES',precio:11.25},
-   {descripcion:'1360 + BONUS 147 DIAMANTES',precio:14.75},
-   {descripcion:'1540 + BONUS 198 DIAMANTES',precio:16.50},
-   {descripcion:'2180 + BONUS 218 DIAMANTES',precio:21.25},
-   {descripcion:'2620 + BONUS 350 DIAMANTES',precio:26.00},
-   {descripcion:'5600 + BONUS 560 DIAMANTES',precio:51.00}];
+  diamante: DiamanteI[] = [];
+  // [{descripcion:'100 + BONUS 10 DIAMANTES',precio:1.30},
+  //  {descripcion:'200 + BONUS 20 DIAMANTES',precio: 2.60},
+  //  {descripcion:'310 + BONUS 31 DIAMANTES',precio: 3.50},
+  //  {descripcion:'520 + BONUS 52 DIAMANTES',precio: 5.25},
+  //  {descripcion:'620 + BONUS 62 DIAMANTES',precio: 6.75},
+  //  {descripcion:'825 + BONUS 88 DIAMANTES',precio: 8.85},
+  //  {descripcion:'1060 + BONUS 106 DIAMANTES',precio:11.25},
+  //  {descripcion:'1360 + BONUS 147 DIAMANTES',precio:14.75},
+  //  {descripcion:'1540 + BONUS 198 DIAMANTES',precio:16.50},
+  //  {descripcion:'2180 + BONUS 218 DIAMANTES',precio:21.25},
+  //  {descripcion:'2620 + BONUS 350 DIAMANTES',precio:26.00},
+  //  {descripcion:'5600 + BONUS 560 DIAMANTES',precio:51.00}];
 
 
    slideConfig={"slidesToShow":4,"slidesToScroll": 4};
@@ -154,6 +155,8 @@ export class HomeComponent implements OnInit {
               
             }
           )
+
+          this.getPrecios();
         }
       });  
       
@@ -189,9 +192,9 @@ export class HomeComponent implements OnInit {
   }
 
   recuperarSelecion(diam: any){
-    const {descripcion,precio} = diam;
-    this.ventaDiamante.precioDiamante = precio; 
-    this.ventaDiamante.descripcionDiamantes = descripcion;
+    const {diamantes,valor} = diam;
+    this.ventaDiamante.precioDiamante = valor; 
+    this.ventaDiamante.descripcionDiamantes = diamantes;
     console.log(this.ventaDiamante);
   
     
@@ -241,14 +244,45 @@ export class HomeComponent implements OnInit {
   addSlide() {
    // this.diamante.push({img: "http://placehold.it/350x150/777777"})
   const dialogRef =  this.dialog.open(DialogaddiamanteComponent,{
-    data:{descripcion: '', precio: 0}
+    data:{diamantes: '', valor: 0,path: 1,colorPrice: "#FF4842", id: null}
   });
 
-  dialogRef.afterClosed().subscribe(resul => {
-    if(resul) this.diamante.push(resul);
-  });
+  // dialogRef.afterClosed().subscribe(resul => {
+  //   if(resul){
+      
+  //   };
+  // });
 
   }
+
+
+  editPrice(price: DiamanteI){
+    const dialogRef = this.dialog.open(EdtipriceComponent,{
+      data: {diamantes: price.diamantes, valor: price.valor,path: price.path,
+        colorPrice: price.colorPrice, id: price.id}
+    });
+  }
+
+  deletePrice(price: DiamanteI){
+    swal({
+      closeOnClickOutside: false,
+      title: "Eliminar",
+      text: "Estas seguro de elimar NO se podra recuperar ",
+      icon: "warning",
+      buttons: ['cancelar','Eliminar Precio'],
+      dangerMode: true,
+    })
+    .then((deletes)=>{
+      if(deletes){
+        this.diamanteSvc.deletePrice(price).then(res =>{
+
+        }).catch(err =>{
+          swal('Error al eliminar' , `Alog salio mal ${err}`,'error');
+        })
+      }
+    })
+  }
+  
   
   removeSlide() {
     //this.diamante.length = this.diamante.length - 1;
@@ -384,5 +418,17 @@ export class HomeComponent implements OnInit {
     err => {
       swal('Error', `Algo sali mal al eliminar la imagen${err}`, 'error');
     });
+  }
+
+  getPrecios():void{
+    this.diamanteSvc.getPrices().subscribe(res => {
+        this.diamante = [];
+        res.forEach(valu =>{
+          this.diamante.push(valu as DiamanteI);
+        })
+    },error =>{
+      console.log(error);
+      
+    })
   }
 }

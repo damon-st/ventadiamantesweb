@@ -1,4 +1,8 @@
 export interface DiamanteI{
-   descripcion: string;
-   precio: number;
+   colorPrice: string;
+   valor: number;
+   diamantes: string;
+   id: string;
+   path: number;
+
 }

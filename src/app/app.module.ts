@@ -27,6 +27,7 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
 import { DialogaddiamanteComponent } from './componets/dialogaddiamante/dialogaddiamante.component';
 import {AngularFireMessagingModule} from '@angular/fire/messaging';
 import { DialogimageComponent } from './componets/dialogimage/dialogimage.component';
+import { EdtipriceComponent } from './componets/edtiprice/edtiprice.component';
  
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { DialogimageComponent } from './componets/dialogimage/dialogimage.compon
     LoginComponent,
     HomeComponent,
     DialogaddiamanteComponent,
-    DialogimageComponent
+    DialogimageComponent,
+    EdtipriceComponent
   ],
   imports: [
     BrowserModule,
