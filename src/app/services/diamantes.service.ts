@@ -90,4 +90,9 @@ export class DiamantesService {
   public deletePrice(price: DiamanteI){
     return this.dtf.list('Precios').remove(price.id);
   }
+
+
+  public getAllVentas(){
+    return this.dtf.list('Venta',query => query.orderByKey()).valueChanges();
+  }
 }

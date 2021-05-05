@@ -28,6 +28,7 @@ import { DialogaddiamanteComponent } from './componets/dialogaddiamante/dialogad
 import {AngularFireMessagingModule} from '@angular/fire/messaging';
 import { DialogimageComponent } from './componets/dialogimage/dialogimage.component';
 import { EdtipriceComponent } from './componets/edtiprice/edtiprice.component';
+import { InicioDiamantesComponent } from './componets/inicio-diamantes/inicio-diamantes.component';
  
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { EdtipriceComponent } from './componets/edtiprice/edtiprice.component';
     HomeComponent,
     DialogaddiamanteComponent,
     DialogimageComponent,
-    EdtipriceComponent
+    EdtipriceComponent,
+    InicioDiamantesComponent
   ],
   imports: [
     BrowserModule,

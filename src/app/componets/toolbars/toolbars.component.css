@@ -23,3 +23,12 @@
 .full{
     width: 100%;
 }
+
+.inicio{
+    margin-left: 15px;
+}
+
+.active{
+    border-bottom: 5px solid white;
+    border-radius: 5px;
+}

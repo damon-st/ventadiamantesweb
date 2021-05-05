@@ -39,6 +39,43 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     justify-content: center;
 }
 
+
+.grid-venta{
+    margin-bottom: 50px;
+}
+
+.img-venta{
+    width: 100px;
+    margin: calc(50% - 50px);
+    text-align: center;
+}
+
+.total-ventas{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    grid-gap: 50px;
+    position: fixed;
+    z-index: 100;
+    bottom: 0px;
+    color: white;
+}
+
+.total-ventas:last-child{
+    
+}
+
+
+
+.texto-venta{
+    text-align: center;
+    font-size: 18px;
+}
+.texto-venta:last-child{
+    color: red;
+}
+
+
 @media only screen and (max-width: 500px){
     .btn-large{
         width: 100%;

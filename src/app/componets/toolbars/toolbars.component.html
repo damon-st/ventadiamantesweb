@@ -1,8 +1,9 @@
 <mat-toolbar class="full" color="primary">
     <mat-toolbar-row>
-      <span class="shadow">VENTA DE DIAMANTES</span>
+      <span class="shadow" routerLink="home" routerLinkActive="active">VENTA DE DIAMANTES</span>
+      <span class="shadow inicio" *ngIf="(auth.user | async)" routerLink="diamantes" routerLinkActive="active">Inicio</span>
       <span class="example-spacer"></span>
-      <span class="btn-close shadow" *ngIf="(auth.user | async)" (click)="logout()">Salir
+      <span class="btn-close shadow" *ngIf="(auth.user | async)" (click)="logout()" routerLinkActive="active">Salir
           <mat-icon class="margin-icon" aria-label="Cerrar Seccion">exit_to_app</mat-icon>
       </span>
     </mat-toolbar-row>
