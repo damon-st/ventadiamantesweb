@@ -1,6 +1,12 @@
 <div class="background-black">
   <mat-progress-bar mode="indeterminate" *ngIf="ventas.length<1"></mat-progress-bar>
 
+  <mat-form-field appearance="legacy" class="search-contenet">
+    <mat-label>Buscar por fecha o por ID</mat-label>
+    <input matInput name="search" [ngModel]="searchText" (ngModelChange)="searchVenta($event)" >
+    <mat-icon matSuffix>event</mat-icon>
+  </mat-form-field>
+
 <mat-grid-list cols="3" rowHeight="400px" class="grid-venta" *ngIf="ventas.length>1">
     <mat-grid-tile *ngFor="let venta of ventas" >
         <mat-card>

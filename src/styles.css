@@ -84,6 +84,12 @@ background: linear-gradient(90deg, rgba(103,58,183,1) 0%, rgba(116,12,128,1) 50%
 }
 
 
+.search-contenet{
+    width: 100%;
+    background-color: white;
+    font-size: 20px;
+}
+
 @media only screen and (max-width: 500px){
     .btn-large{
         width: 100%;

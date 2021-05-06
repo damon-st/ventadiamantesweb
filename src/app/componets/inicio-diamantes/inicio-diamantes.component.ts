@@ -10,10 +10,15 @@ import swal from 'sweetalert';
 export class InicioDiamantesComponent implements OnInit {
 
   ventas:VentaI[] = [];
+  ventasSearch: VentaI[] = [];
 
   numerodeVentas: number = 0;
   totalVentas:number =0;
   totalVentasTexto:string = '';
+
+    
+  searchText:string = '';
+
 
   constructor(private diamanteSVC: DiamantesService) { }
 
@@ -22,9 +27,11 @@ export class InicioDiamantesComponent implements OnInit {
       this.numerodeVentas  = 0;
       this.totalVentas =0;
       this.ventas = [];
+      this.ventasSearch = [];
       res.forEach(venta =>{
         this.ventas.push(venta as VentaI);
       });
+      this.ventasSearch = this.ventas;
       this.numerodeVentas = this.ventas.length;
       this.ventas.forEach(venta =>{
         this.totalVentas +=venta.precioDiamante;
@@ -36,4 +43,27 @@ export class InicioDiamantesComponent implements OnInit {
     })
   }
 
+
+  searchVenta(datos:string){
+    if(datos.length > 1){
+      if(this.ventas.length>1){
+        let resultado = this.ventas.filter((e:VentaI)=>{
+           if(e.descripcion.trim().toLowerCase().includes(datos.toLowerCase().trim())){
+             return e;
+           }
+         });
+         
+         if(resultado.length>=1){
+           this.ventas= [];
+           resultado.forEach(v =>{
+             this.ventas.push(v as VentaI);
+           })
+         }
+       }
+    }else{
+      this.ventas = this.ventasSearch;
+    }
+ 
+    
+  }
 }
