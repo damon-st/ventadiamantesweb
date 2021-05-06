@@ -92,6 +92,11 @@ background: linear-gradient(90deg, rgba(103,58,183,1) 0%, rgba(116,12,128,1) 50%
 }
 
 
+.image-venta{
+    width: 100%;
+    cursor: pointer;
+}
+
 
 @media only screen and (max-width: 500px){
     .btn-large{
@@ -100,4 +105,5 @@ background: linear-gradient(90deg, rgba(103,58,183,1) 0%, rgba(116,12,128,1) 50%
         justify-content: center;
         margin-bottom: 10px;
     }
+  
 }

@@ -1,3 +1,4 @@
+import { MediaMatcher } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -5,6 +6,7 @@ import { VentaI } from 'src/app/models/venta';
 import { DiamantesService } from 'src/app/services/diamantes.service';
 import swal from 'sweetalert';
 import { DialogimageComponent } from '../dialogimage/dialogimage.component';
+import { VentaImagenesComponent } from '../venta-imagenes/venta-imagenes.component';
 @Component({
   selector: 'app-inicio-diamantes',
   templateUrl: './inicio-diamantes.component.html',
@@ -19,17 +21,31 @@ export class InicioDiamantesComponent implements OnInit {
   totalVentas:number =0;
   totalVentasTexto:string = '';
 
-    
+  cols: number ;  
   searchText:string = '';
 
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl()
   });
+
+  mediaQueryList: MediaQueryList;
+
   constructor(private diamanteSVC: DiamantesService, 
-    private matDialog: MatDialog) { }
+    private matDialog: MatDialog,
+    private matches: MediaMatcher) {
+      this.mediaQueryList =matches.matchMedia('(max-width: 500px)');
+      this.cols = 3;
+     }
 
   ngOnInit(): void {
+
+    console.log(this.mediaQueryList.matches);
+    
+    if(this.mediaQueryList.matches === true){
+      this.cols =1;
+    }
+
     this.diamanteSVC.getAllVentas().subscribe(res => {
    
       this.ventas = [];
@@ -126,7 +142,7 @@ export class InicioDiamantesComponent implements OnInit {
 
   openImages(venta: VentaI){
     console.log(venta);
-    this.matDialog.open(DialogimageComponent,{
+    this.matDialog.open(VentaImagenesComponent,{
       data: venta.image
     })
   }
