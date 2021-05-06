@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { VentaI } from 'src/app/models/venta';
 import { DiamantesService } from 'src/app/services/diamantes.service';
 import swal from 'sweetalert';
+import { DialogimageComponent } from '../dialogimage/dialogimage.component';
 @Component({
   selector: 'app-inicio-diamantes',
   templateUrl: './inicio-diamantes.component.html',
@@ -24,29 +26,34 @@ export class InicioDiamantesComponent implements OnInit {
     start: new FormControl(),
     end: new FormControl()
   });
-  constructor(private diamanteSVC: DiamantesService) { }
+  constructor(private diamanteSVC: DiamantesService, 
+    private matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.diamanteSVC.getAllVentas().subscribe(res => {
-      this.numerodeVentas  = 0;
-      this.totalVentas =0;
+   
       this.ventas = [];
       this.ventasSearch = [];
       res.forEach(venta =>{
         this.ventas.push(venta as VentaI);
       });
       this.ventasSearch = this.ventas;
-      this.numerodeVentas = this.ventas.length;
-      this.ventas.forEach(venta =>{
-        this.totalVentas +=venta.precioDiamante;
-      })
-      this.totalVentasTexto = this.totalVentas.toFixed(2);
+      this.getValorVentas();
     },error =>{
       console.log(error);
       swal('Error', error,'error');
     })
   }
 
+  getValorVentas(){
+    this.numerodeVentas  = 0;
+    this.totalVentas =0;
+    this.numerodeVentas = this.ventas.length;
+    this.ventas.forEach(venta =>{
+      this.totalVentas +=venta.precioDiamante;
+    })
+    this.totalVentasTexto = this.totalVentas.toFixed(2);
+  }
 
   searchVenta(datos:string){
     if(datos.length > 1){
@@ -65,38 +72,42 @@ export class InicioDiamantesComponent implements OnInit {
        
     }else{
       this.ventas = this.ventasSearch;
+      this.getValorVentas();
     }
  
     
   }
 
   searchVentaForDays(datos:any){
+   this.ventas =[];
+   this.ventas = this.ventasSearch;
    const {start, end} = datos;
    const fechaInicio = new Date(start);
    const fechaFinal = new Date(end);
    
    const inicio = this.getFechaNumber(fechaInicio);
    const final = this.getFechaNumber(fechaFinal);
-   console.log(inicio);
-   console.log(final);
-   
-   if(inicio > 0 ){
+
+   if(inicio !== 0 || final !==0){
     let resultado= this.ventas.filter((v:VentaI)=>{
-      console.log(v);
-      
        if(v.numeroVenta >= inicio && v.numeroVenta <= final){
           return v;
        }
      });
-     this.ventas=[];
-     console.log(resultado);
+     if(resultado.length !==0){
+       this.ventas = [];
      
      resultado.forEach(v =>{
        this.ventas.push(v as VentaI);
      })
+
+     this.getValorVentas();
+     }
+    
    }else{
      this.ventas =[];
      this.ventas = this.ventasSearch;
+     this.getValorVentas();
    }
   }
 
@@ -111,5 +122,12 @@ export class InicioDiamantesComponent implements OnInit {
     this.numero += dias[new Date(fecha).getDate().toString()];
 
     return Number.parseFloat(this.numero);
+  }
+
+  openImages(venta: VentaI){
+    console.log(venta);
+    this.matDialog.open(DialogimageComponent,{
+      data: venta.image
+    })
   }
 }
