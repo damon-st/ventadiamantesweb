@@ -93,10 +93,16 @@ background: linear-gradient(90deg, rgba(103,58,183,1) 0%, rgba(116,12,128,1) 50%
 
 
 .image-venta{
-    width: 100%;
+    width: calc(100% - 10vw);
+
     cursor: pointer;
 }
 
+
+.form-respuesta{
+    width: 100%;
+    
+}
 
 @media only screen and (max-width: 500px){
     .btn-large{
