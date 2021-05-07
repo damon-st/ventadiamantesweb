@@ -35,7 +35,7 @@
                           <mat-icon>collections</mat-icon>
                           <span >Ver Imagenes</span>
                         </button>
-                        <button mat-menu-item>
+                        <button mat-menu-item (click)="addRespuesta(venta)">
                           <mat-icon>question_answer</mat-icon>
                           <span>Añadir Respuesta</span>
                         </button>
@@ -43,11 +43,11 @@
                           <mat-icon>edit</mat-icon>
                           <span>Editar</span>
                         </button>
-                        <button mat-menu-item>
+                        <button mat-menu-item (click)="quitarRespuesta(venta)">
                           <mat-icon>backspace</mat-icon>
                           <span>Quitar Anotado</span>
                         </button>
-                        <button mat-menu-item>
+                        <button mat-menu-item (click)="deleteVenta(venta)">
                           <mat-icon>delete</mat-icon>
                           <span>Eliminar</span>
                         </button>

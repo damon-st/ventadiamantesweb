@@ -30,6 +30,7 @@ import { DialogimageComponent } from './componets/dialogimage/dialogimage.compon
 import { EdtipriceComponent } from './componets/edtiprice/edtiprice.component';
 import { InicioDiamantesComponent } from './componets/inicio-diamantes/inicio-diamantes.component';
 import { VentaImagenesComponent } from './componets/venta-imagenes/venta-imagenes.component';
+import { AddRespuestaComponent } from './componets/add-respuesta/add-respuesta.component';
  
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { VentaImagenesComponent } from './componets/venta-imagenes/venta-imagene
     DialogimageComponent,
     EdtipriceComponent,
     InicioDiamantesComponent,
-    VentaImagenesComponent
+    VentaImagenesComponent,
+    AddRespuestaComponent
   ],
   imports: [
     BrowserModule,

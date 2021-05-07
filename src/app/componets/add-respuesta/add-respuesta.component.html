@@ -1,0 +1,12 @@
+<form [formGroup]="formulario" class="example-form" (ngSubmit)="addRespuesta(formulario.value)">
+    <mat-form-field class="example-full-width">
+      <mat-label>Añadir respuesta</mat-label>
+      <input matInput #message maxlength="256" name="colorValorPorVenta" formControlName="colorValorPorVenta" >
+      <mat-hint align="start"><strong>Añade la respuesta</strong> </mat-hint>
+      <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+    </mat-form-field>
+        <p *ngIf="error">{{error}}</p>
+        <button mat-button type="button" color="warn" (click)="closeDialog()" >Cancelar</button>
+        <button mat-button type="submit" color="primary" [disabled]="formulario.invalid" >Enviar</button>
+    
+</form>

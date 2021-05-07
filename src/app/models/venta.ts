@@ -5,7 +5,7 @@ export class VentaI{
     descripcionDiamantes?: string;
     fechaVenta?: string;
     idVentaRef?: string;
-    image?: ImagesRef[];
+    image?: any[];
     numeroVenta?: number;
     precioDiamante?: number;
     vendedorName?:string;

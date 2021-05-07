@@ -95,4 +95,14 @@ export class DiamantesService {
   public getAllVentas(){
     return this.dtf.list('Venta',query => query.orderByKey()).valueChanges();
   }
+
+  public addRespuestaVenta(venta:VentaI,respuesta:any){
+    return this.dtf.list('Venta').update(venta.idVentaRef,{
+       colorValorPorVenta: respuesta
+    });
+  }
+
+  public deleteVenta(venta:VentaI){
+    return this.dtf.list('Venta').remove(venta.idVentaRef);
+  }
 }

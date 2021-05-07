@@ -2,9 +2,11 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { VentaI } from 'src/app/models/venta';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ImagesRef, VentaI } from 'src/app/models/venta';
 import { DiamantesService } from 'src/app/services/diamantes.service';
 import swal from 'sweetalert';
+import { AddRespuestaComponent } from '../add-respuesta/add-respuesta.component';
 import { DialogimageComponent } from '../dialogimage/dialogimage.component';
 import { VentaImagenesComponent } from '../venta-imagenes/venta-imagenes.component';
 @Component({
@@ -33,7 +35,8 @@ export class InicioDiamantesComponent implements OnInit {
 
   constructor(private diamanteSVC: DiamantesService, 
     private matDialog: MatDialog,
-    private matches: MediaMatcher) {
+    private matches: MediaMatcher,
+    private _snackBar:MatSnackBar) {
       this.mediaQueryList =matches.matchMedia('(max-width: 500px)');
       this.cols = 3;
      }
@@ -145,5 +148,41 @@ export class InicioDiamantesComponent implements OnInit {
     this.matDialog.open(VentaImagenesComponent,{
       data: venta.image
     })
+  }
+
+  addRespuesta(venta:VentaI){
+    this.matDialog.open(AddRespuestaComponent,{
+      data:venta
+    })
+  }
+
+  quitarRespuesta(venta:VentaI){
+    this.diamanteSVC.addRespuestaVenta(venta,'').then((res)=>{
+      this._snackBar.open('Exito al quitar la anotacion','ok',{
+        duration: 3000
+      })
+    }).catch(error =>{
+      console.log(error);
+      this._snackBar.open(`Ocurrio un error al quitar la anotacion erro = ${error}`,'ok',{
+        duration: 3000
+      })
+    })
+  }
+
+  deleteVenta(venta:VentaI){
+
+   this.diamanteSVC.deleteVenta(venta).then((res)=>{
+    venta.image.forEach(v=>{
+      this.diamanteSVC.deleteImageDB(v);
+       
+      });    
+    this._snackBar.open(`Eliminado Correcto de la venta`,'ok',{
+      duration: 3000
+    })
+   }).catch(error =>{
+     this._snackBar.open(`Ocurrio un error al eliminar la venta = ${error}`,'ok',{
+       duration: 3000
+     })
+   })
   }
 }
