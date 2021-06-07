@@ -29,4 +29,9 @@ export class ToolbarsComponent implements OnInit {
     );
   }
 
+  openMenu():void{
+    let menu = document.getElementById('menu-sidebar');
+    menu.classList.toggle('menu-sidebar-show');
+  }
+
 }

@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+    overflow-x: hidden;
+}
 
 .edit{
   
@@ -104,7 +106,47 @@ background: linear-gradient(90deg, rgba(103,58,183,1) 0%, rgba(116,12,128,1) 50%
     
 }
 
-@media only screen and (max-width: 500px){
+.menu-final{
+    display: none;
+}
+
+
+
+.menu-sidebar{
+ 
+    position: fixed;
+    z-index: 100;
+    width: 50%;
+    height: 100%;
+    background: #673ab7;
+    color: white;
+    left: -1000px;
+    transition: all 0.4s ease-in-out;
+}
+
+.menu-sidebar-show{
+
+    left: 0;
+}
+
+.menu-sidebar ul{
+    list-style: none;
+}
+
+.menu-sidebar ul li{
+    font-size: 1rem;
+    padding: 5px;
+}
+
+.container-venta{
+    width: 100%;
+    padding: 5px 5px 5px 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 5px;
+}
+
+@media only screen and (max-width: 560px){
     .btn-large{
         width: 100%;
         display: inline-block;
@@ -112,4 +154,17 @@ background: linear-gradient(90deg, rgba(103,58,183,1) 0%, rgba(116,12,128,1) 50%
         margin-bottom: 10px;
     }
   
+    .menu-inicio{
+        display:none ;
+    }
+
+    .menu-final{
+        display: block;
+    }
+
+
+    .container-venta{
+        grid-template-columns: 1fr;
+    }
+    
 }

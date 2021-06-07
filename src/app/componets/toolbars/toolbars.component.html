@@ -1,10 +1,20 @@
-<mat-toolbar class="full" color="primary">
+<mat-toolbar class="nav-bar" color="primary">
     <mat-toolbar-row>
       <span class="shadow" routerLink="home" routerLinkActive="active">VENTA DE DIAMANTES</span>
-      <span class="shadow inicio" *ngIf="(auth.user | async)" routerLink="diamantes" routerLinkActive="active">Inicio</span>
-      <span class="example-spacer"></span>
-      <span class="btn-close shadow" *ngIf="(auth.user | async)" (click)="logout()" routerLinkActive="active">Salir
+      <span class="shadow inicio menu-inicio" *ngIf="(auth.user | async)" routerLink="diamantes" routerLinkActive="active">Ventas</span>
+      <span class="example-spacer "></span>
+      <span class="btn-close shadow menu-inicio" *ngIf="(auth.user | async)" (click)="logout()" routerLinkActive="active">Salir
           <mat-icon class="margin-icon" aria-label="Cerrar Seccion">exit_to_app</mat-icon>
+      </span>
+      <span  class="menu-final" *ngIf="(auth.user | async)" (click)="openMenu()">
+          <mat-icon aria-label="Menu">menu</mat-icon>
       </span>
     </mat-toolbar-row>
 </mat-toolbar>
+
+<div class="menu-sidebar" id="menu-sidebar">
+  <ul>
+    <li routerLink="diamantes" routerLinkActive="active">Ventas</li>
+    <li (click)="logout()">Cerrar Seccion</li>
+  </ul>
+</div>

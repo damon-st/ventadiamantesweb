@@ -21,8 +21,8 @@
   </mat-form-field>
   
 
-<mat-grid-list [cols]="cols" rowHeight="400px" class="grid-venta" *ngIf="ventas.length>0">
-    <mat-grid-tile *ngFor="let venta of ventas" >
+<div class="container-venta" *ngIf="ventas.length>0">
+    <div *ngFor="let venta of ventas" >
         <mat-card>
             <mat-card-header>
                 <mat-card-title>{{venta.fechaVenta}}
@@ -70,8 +70,8 @@
             </mat-card-footer>
         </mat-card>
         
-    </mat-grid-tile>
-</mat-grid-list>
+    </div>
+</div>
 
 <mat-toolbar color="primary" class="total-ventas">
         <span>TOTAL = ${{totalVentasTexto}}</span>
