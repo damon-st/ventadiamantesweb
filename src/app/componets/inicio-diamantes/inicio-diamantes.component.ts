@@ -217,7 +217,7 @@ export class InicioDiamantesComponent implements OnInit {
     pdf.footer(`Nota: Este comprabante no es valido para reclamos o en ciertas entidades gracias por preferirnos.`);
 
 
-     pdf.create().open();
+     pdf.create().download(`ID ${venta.descripcion}`);
 
     
   }
