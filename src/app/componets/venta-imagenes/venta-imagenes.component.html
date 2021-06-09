@@ -1,3 +1,4 @@
+<mat-dialog-content>
 <ngx-slick-carousel
 class="carousels"
 #slickModla="slick-carousel"
@@ -5,15 +6,15 @@ class="carousels"
 >
 
     <div ngxSlickItem class="slide containter-image" *ngFor="let url of datos">
-        <mat-dialog-content>
+      
             <img [src]="url" class="image-venta">
-        </mat-dialog-content>
+      
         
     </div>
 
 
 </ngx-slick-carousel>
-
+</mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-raised-button color="primary" (click)="closeDialog()">Cerrar</button>
  </mat-dialog-actions>
