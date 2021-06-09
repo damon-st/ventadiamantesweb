@@ -32,6 +32,15 @@ import { InicioDiamantesComponent } from './componets/inicio-diamantes/inicio-di
 import { VentaImagenesComponent } from './componets/venta-imagenes/venta-imagenes.component';
 import { AddRespuestaComponent } from './componets/add-respuesta/add-respuesta.component';
  
+
+//pdf-wraper for only load font
+// Import pdfmake-wrapper and the fonts to use
+import { PdfMakeWrapper } from 'pdfmake-wrapper';
+import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
+// Set the fonts to use
+PdfMakeWrapper.setFonts(pdfFonts);
+
+
 @NgModule({
   declarations: [
     AppComponent,

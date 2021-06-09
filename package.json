@@ -25,6 +25,8 @@
     "firebase": "^7.0 || ^8.0",
     "jquery": "^3.5.1",
     "ngx-slick-carousel": "^0.5.1",
+    "pdfmake": "^0.1.71",
+    "pdfmake-wrapper": "^2.1.1",
     "rxjs": "~6.6.0",
     "slick-carousel": "^1.8.1",
     "sweetalert": "^2.1.2",

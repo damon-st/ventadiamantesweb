@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Img, ITable, PdfMakeWrapper, Table, Txt } from 'pdfmake-wrapper';
 import { ImagesRef, VentaI } from 'src/app/models/venta';
 import { DiamantesService } from 'src/app/services/diamantes.service';
 import swal from 'sweetalert';
@@ -184,5 +185,52 @@ export class InicioDiamantesComponent implements OnInit {
        duration: 3000
      })
    })
+  }
+
+  async factura(venta:VentaI){
+    const pdf = new PdfMakeWrapper();
+    const numeroR =  Math.floor(Math.random()*100);
+    pdf.header(`Factura N° ${numeroR}`);
+    //https://i.postimg.cc/fWB1qcTx/Whats-App-Image-2021-06-09-at-14-12-33.jpg
+    pdf.add(await new Img('https://i.postimg.cc/9fGVSDry/facut.jpg').build());
+    pdf.add(pdf.ln(1));
+    pdf.add(
+      new Txt('CABINAS TELEFONICAS Y CYBER TELEJAS').fontSize(18).alignment('center').bold().end
+    )
+    pdf.add(pdf.ln(2));
+    //pdf.add('Direccion: Nueva Aurora, calle Fenicio Angulo OE1J');
+    //pdf.add('Telefono: (593) 0967031084 / (593) 0995901335');
+    pdf.add(
+      new Txt('Comprobante de recarga electronica del juego FreeFire').bold().end
+    );
+    pdf.add(pdf.ln(1));
+    pdf.add(
+      new Txt(`ID del Jugador: ${venta.descripcion}`).end
+    );
+    pdf.add(
+      new Txt(`Fecha de venta realizada: ${venta.fechaVenta}`).end
+    );
+    pdf.add(pdf.ln(2));
+    pdf.add(this.crearTablaFacutra(venta));
+
+
+    pdf.footer(`Nota: Este comprabante no es valido para reclamos o en ciertas entidades gracias por preferirnos.`);
+
+
+     pdf.create().open();
+
+    
+  }
+
+  crearTablaFacutra(venta:VentaI): ITable{
+    const iva = venta.precioDiamante * 0.12;
+    const subtotal =  venta.precioDiamante - iva;
+      return new Table([
+        ['Cantidad',new Txt('Descripción').bold().alignment('center').end,'V.Unitario' ,'V.Total'],
+        [1, `Recarga online del Juego FreeFire diamantes ${venta.descripcionDiamantes}`,'',venta.precioDiamante],
+        ['','',new Txt('SUBTOTAL').bold().alignment('right').end,subtotal.toFixed(2)],
+        ['','',new Txt('IVA %12').bold().alignment('right').end, iva.toFixed(2)],
+        ['','',new Txt('TOTAL').bold().alignment('right').end, venta.precioDiamante]
+      ]).end;
   }
 }
