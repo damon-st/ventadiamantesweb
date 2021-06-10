@@ -66,6 +66,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 .background-black{
     background: rgb(103,58,183);
 background: linear-gradient(90deg, rgba(103,58,183,1) 0%, rgba(116,12,128,1) 50%, rgba(87,34,181,1) 100%);
+    width: 100%;
+    display: grid;
+    grid-template-columns: 30% auto;
 }
 
 
@@ -93,6 +96,9 @@ background: linear-gradient(90deg, rgba(103,58,183,1) 0%, rgba(116,12,128,1) 50%
     
 }
 
+.search-contenet .input-search{
+    padding: 0 10px;
+}
 
 .image-venta{
     width: calc(100% - 10vw);
@@ -142,8 +148,14 @@ background: linear-gradient(90deg, rgba(103,58,183,1) 0%, rgba(116,12,128,1) 50%
     width: 100%;
     padding: 5px 5px 5px 5px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr ;
     grid-gap: 5px;
+    margin-bottom: 100px;
+}
+
+.busqueda{
+    position: sticky;
+    top: 0;
 }
 
 
@@ -168,4 +180,7 @@ background: linear-gradient(90deg, rgba(103,58,183,1) 0%, rgba(116,12,128,1) 50%
         grid-template-columns: 1fr;
     }
     
+    .background-black{
+        grid-template-columns: 1fr;
+    }
 }

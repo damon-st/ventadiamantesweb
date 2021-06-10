@@ -27,6 +27,8 @@ export class ToolbarsComponent implements OnInit {
       this.router.navigate(['/login']);
     }).catch(err =>{console.log(err);}
     );
+
+    document.getElementById('menu-sidebar').classList.remove('menu-sidebar-show');
   }
 
   openMenu():void{

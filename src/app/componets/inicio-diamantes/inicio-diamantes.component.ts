@@ -188,6 +188,11 @@ export class InicioDiamantesComponent implements OnInit {
   }
 
   async factura(venta:VentaI){
+
+    this._snackBar.open('Descargando PDF por favor espere...','ok',{
+      duration: 2000
+    })
+
     const pdf = new PdfMakeWrapper();
     const numeroR =  Math.floor(Math.random()*100);
     pdf.header(`Factura N° ${numeroR}`);
@@ -215,6 +220,7 @@ export class InicioDiamantesComponent implements OnInit {
 
 
     pdf.footer(`Nota: Este comprabante no es valido para reclamos o en ciertas entidades gracias por preferirnos.`);
+
 
 
      pdf.create().download(`ID ${venta.descripcion}`);

@@ -1,9 +1,11 @@
 <div class="background-black">
-  <mat-progress-bar mode="indeterminate" *ngIf="ventas.length<1"></mat-progress-bar>
+  <aside >
+    <div class="busqueda">
+        <mat-progress-bar mode="indeterminate" *ngIf="ventas.length<1"></mat-progress-bar>
 
   <mat-form-field appearance="legacy" class="search-contenet">
-    <mat-label>Buscar por ID</mat-label>
-    <input matInput name="search" [ngModel]="searchText" (ngModelChange)="searchVenta($event)" >
+    <mat-label class="input-search" >Buscar por ID</mat-label>
+    <input class="input-search" matInput name="search" [ngModel]="searchText" (ngModelChange)="searchVenta($event)" >
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 
@@ -19,9 +21,11 @@
     <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
     <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
   </mat-form-field>
+    </div>
+  </aside>
   
 
-<div class="container-venta" *ngIf="ventas.length>0">
+  <div class="container-venta" *ngIf="ventas.length>0">
     <div *ngFor="let venta of ventas" >
         <mat-card>
             <mat-card-header>
@@ -75,11 +79,11 @@
         </mat-card>
         
     </div>
-</div>
+  </div>
 
-<mat-toolbar color="primary" class="total-ventas">
-        <span>TOTAL = ${{totalVentasTexto}}</span>
-        <span>N° = {{numerodeVentas}}</span>
-        <span class="example-spacer"></span>
-</mat-toolbar>
 </div>
+<mat-toolbar color="primary" class="total-ventas">
+  <span>TOTAL = ${{totalVentasTexto}}</span>
+  <span>N° = {{numerodeVentas}}</span>
+  <span class="example-spacer"></span>
+</mat-toolbar>
