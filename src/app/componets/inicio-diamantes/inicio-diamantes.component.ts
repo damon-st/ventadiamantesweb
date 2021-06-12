@@ -194,10 +194,17 @@ export class InicioDiamantesComponent implements OnInit {
     })
 
     const pdf = new PdfMakeWrapper();
-    const numeroR =  Math.floor(Math.random()*100);
-    pdf.header(`Factura N° ${numeroR}`);
+    const numeroR =  Math.floor(Math.random()*1000);
+    pdf.header(new Txt(`Factura N° ${numeroR}`).fontSize(15).end);
+
+    pdf.add(
+      
+      await new Img('https://i.postimg.cc/qBnXV365/frefire.png').alignment('right').build()
+      
+    );
+
     //https://i.postimg.cc/fWB1qcTx/Whats-App-Image-2021-06-09-at-14-12-33.jpg
-    pdf.add(await new Img('https://i.postimg.cc/9fGVSDry/facut.jpg').build());
+    pdf.add(await new Img('https://i.postimg.cc/WzkPS79j/telejas.png').build());
     pdf.add(pdf.ln(1));
     pdf.add(
       new Txt('CABINAS TELEFONICAS Y CYBER TELEJAS').fontSize(18).alignment('center').bold().end
@@ -217,7 +224,8 @@ export class InicioDiamantesComponent implements OnInit {
     );
     pdf.add(pdf.ln(2));
     pdf.add(this.crearTablaFacutra(venta));
-
+    
+   
 
     pdf.footer(`Nota: Este comprabante no es valido para reclamos o en ciertas entidades gracias por preferirnos.`);
 
@@ -233,7 +241,7 @@ export class InicioDiamantesComponent implements OnInit {
     const subtotal =  venta.precioDiamante - iva;
       return new Table([
         ['Cantidad',new Txt('Descripción').bold().alignment('center').end,'V.Unitario' ,'V.Total'],
-        [1, `Recarga online del Juego FreeFire diamantes ${venta.descripcionDiamantes}`,'',venta.precioDiamante],
+        [1, `Recarga online del Juego FreeFire diamantes ${venta.descripcionDiamantes} \n\n\n\n`,'',venta.precioDiamante],
         ['','',new Txt('SUBTOTAL').bold().alignment('right').end,subtotal.toFixed(2)],
         ['','',new Txt('IVA %12').bold().alignment('right').end, iva.toFixed(2)],
         ['','',new Txt('TOTAL').bold().alignment('right').end, venta.precioDiamante]
