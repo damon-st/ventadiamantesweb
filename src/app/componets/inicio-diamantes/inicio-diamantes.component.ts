@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Img, ITable, PdfMakeWrapper, Table, Txt } from 'pdfmake-wrapper';
+import { Img, ITable, PdfMakeWrapper, QR, Table, Txt } from 'pdfmake-wrapper';
 import { ImagesRef, VentaI } from 'src/app/models/venta';
 import { DiamantesService } from 'src/app/services/diamantes.service';
 import swal from 'sweetalert';
@@ -224,7 +224,15 @@ export class InicioDiamantesComponent implements OnInit {
     );
     pdf.add(pdf.ln(2));
     pdf.add(this.crearTablaFacutra(venta));
-    
+    pdf.add(pdf.ln(1));
+    pdf.add(
+      new QR(`
+          ID JUGADOR = ${venta.descripcion}\n
+          Fecha de venta = ${venta.fechaVenta}\n
+          Valor Total = ${venta.precioDiamante}\n
+          ID VENTA = ${venta.idVentaRef}
+      `).fit(100).alignment('center').end
+    );
    
 
     pdf.footer(`Nota: Este comprabante no es valido para reclamos o en ciertas entidades gracias por preferirnos.`);
