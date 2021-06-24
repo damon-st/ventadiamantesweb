@@ -1,5 +1,6 @@
 import { MediaMatcher } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -15,7 +16,7 @@ import { VentaImagenesComponent } from '../venta-imagenes/venta-imagenes.compone
   templateUrl: './inicio-diamantes.component.html',
   styleUrls: ['./inicio-diamantes.component.css']
 })
-export class InicioDiamantesComponent implements OnInit {
+export class InicioDiamantesComponent implements OnInit, AfterViewInit {
 
   ventas:VentaI[] = [];
   ventasSearch: VentaI[] = [];
@@ -34,13 +35,20 @@ export class InicioDiamantesComponent implements OnInit {
 
   mediaQueryList: MediaQueryList;
 
+  
   constructor(private diamanteSVC: DiamantesService, 
     private matDialog: MatDialog,
     private matches: MediaMatcher,
-    private _snackBar:MatSnackBar) {
+    private _snackBar:MatSnackBar,
+   ) {
       this.mediaQueryList =matches.matchMedia('(max-width: 500px)');
       this.cols = 3;
      }
+  ngAfterViewInit(): void {
+    window.onscroll = ()=>{
+      this.scrollFunction();
+    }
+  }
 
   ngOnInit(): void {
 
@@ -63,6 +71,8 @@ export class InicioDiamantesComponent implements OnInit {
       console.log(error);
       swal('Error', error,'error');
     })
+
+    
   }
 
   getValorVentas(){
@@ -254,5 +264,21 @@ export class InicioDiamantesComponent implements OnInit {
         ['','',new Txt('IVA %12').bold().alignment('right').end, iva.toFixed(2)],
         ['','',new Txt('TOTAL').bold().alignment('right').end, venta.precioDiamante]
       ]).end;
+  }
+
+
+  scrollFunction():void{
+    let btn = document.getElementById('btn-scroll-top');
+    if(document.body.scrollTop > 40 || document.documentElement.scrollTop >40){
+      btn.style.display = 'block';
+    }else{
+      btn.style.display = 'none';
+
+    }
+    
+  }
+
+  scrollTop():void{
+    window.scrollTo({top: 0,behavior: 'smooth'});
   }
 }

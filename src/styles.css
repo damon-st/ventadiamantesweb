@@ -159,6 +159,29 @@ background: linear-gradient(90deg, rgba(103,58,183,1) 0%, rgba(116,12,128,1) 50%
 }
 
 
+.btn-scroll-top{
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 200;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #673ab7;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+  
+}
+
+
+.btn-scroll-top:hover{
+    background-color: red;
+}
+
+
 @media only screen and (max-width: 560px){
     .btn-large{
         width: 100%;
