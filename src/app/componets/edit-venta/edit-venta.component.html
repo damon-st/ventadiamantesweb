@@ -1,0 +1,88 @@
+<ngx-slick-carousel
+  class="carousels"
+  #slickModal="slick-carousel"
+  [config]="slideConfig"
+  (init)="slickInit($event)"
+  (breakpoint)="breakpoint($event)"
+  (afterChange)="afterChange($event)"
+  (beforeChange)="beforeChange($event)"
+>
+  <div ngxSlickItem class="slide margen" *ngFor="let dia of diamante">
+    <img src="assets/img/diamante.jpg" alt="imagen" class="imgDiamante" />
+
+    <p class="text-center">{{ dia.diamantes }}</p>
+    <p class="text-center">$ {{ dia.valor }}</p>
+
+    <div class="radio">
+      <mat-radio-button [value]="" (change)="recuperarSelecion(dia)"
+        >Seleccion</mat-radio-button
+      >
+    </div>
+    <div class="edit" >
+      <p class="edit-icon" (click)="editPrice(dia)"><mat-icon >edit</mat-icon></p>
+      <p class="delete-icon" (click)="deletePrice(dia)"><mat-icon>delete</mat-icon></p>
+      
+    </div>
+ 
+  </div>
+</ngx-slick-carousel>
+
+<div class="example-button-container">
+  <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="addSlide()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+
+<mat-progress-bar mode="query" *ngIf="!isReady"></mat-progress-bar>
+<div class="container" *ngIf="isReady">
+  <div class="redondeado">
+    <p class="parrafos">Diamante selecionado: {{ventaDiamante.descripcionDiamantes}} ${{ventaDiamante.precioDiamante}}</p>
+    <p class="parrafos">Vendedor: {{ datosVendedor.name }}</p>
+    <p class="parrafos">Fecha: {{ ventaDiamante.fechaVenta }}</p>
+  </div>
+  
+
+  <form class="form-content" #f="ngForm" (ngSubmit)="crearVenta()">
+    <mat-form-field class="example-full-width">
+      <mat-label class="aria-label">Escribe aqui el id del jugador</mat-label>
+      <input matInput #idjugador maxlength="256" minlength="4" placeholder="" name="descripcion" [(ngModel)]="ventaDiamante.descripcion" pattern="[a-zA-Z0-9 ]*" required/>
+      <mat-hint align="start"><strong>no olvidar</strong> </mat-hint>
+      <mat-hint align="end">{{ idjugador.value.length }} / 256</mat-hint>
+    </mat-form-field>
+
+
+    <mat-label>Selecciona las imagenes</mat-label>
+    <input #imgFile type="file" (change)="recuperarDirImages($event)" accept=".png, .jpg, .jpeg" multiple>
+    <br>
+    <input #imageFiles type="hidden" [value]="urlImage | async"/>
+    <mat-progress-bar mode="determinate" [value]="valorSubidaImg" class="progress"></mat-progress-bar>
+
+
+    <!-- <mat-grid-list cdkDropList cols="2" rowHeight="2:1"*ngIf="imgRef.length" (cdkDropListDropped)="drop($event)">
+      <mat-grid-tile class="example-box" *ngFor="let i of imgRef; let indie=index" cdkDrag>
+       
+        <button type="button" mat-fab color="warn" (click)="deleteImage(i,indie)" >
+          <mat-icon>delete</mat-icon>
+        </button>
+        <img [src]="i" alt="img" class="img-rounded" (click)="openImage(i)" width="250">
+        
+      </mat-grid-tile>
+    </mat-grid-list> -->
+    
+
+    <div cdkDropList class="example-list" *ngIf="ventaDiamante.image.length" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let i of ventaDiamante.image; let indie=index" cdkDrag>
+       
+        <button type="button" mat-fab color="warn" (click)="deleteImage(i,indie)" >
+          <mat-icon>delete</mat-icon>
+        </button>
+        <img [src]="i" alt="img" class="img-rounded" (click)="openImage(i)" width="250">
+        
+      </div>
+    </div>
+
+    <button mat-raised-button color="primary"  [disabled]="f.invalid"  class="btn-block">Actualizar</button>
+
+  </form>
+</div>

@@ -1,9 +1,10 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Img, ITable, PdfMakeWrapper, QR, Table, Txt } from 'pdfmake-wrapper';
 import { ImagesRef, VentaI } from 'src/app/models/venta';
 import { DiamantesService } from 'src/app/services/diamantes.service';
@@ -36,10 +37,13 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
   mediaQueryList: MediaQueryList;
 
   
+  @ViewChild('btnscrolltop') btnscrolltop : ElementRef;
+
   constructor(private diamanteSVC: DiamantesService, 
     private matDialog: MatDialog,
     private matches: MediaMatcher,
     private _snackBar:MatSnackBar,
+    private route: Router
    ) {
       this.mediaQueryList =matches.matchMedia('(max-width: 500px)');
       this.cols = 3;
@@ -273,11 +277,10 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
 
 
   scrollFunction():void{
-    let btn = document.getElementById('btn-scroll-top');
     if(document.body.scrollTop > 40 || document.documentElement.scrollTop >40){
-      btn.style.display = 'block';
+      this.btnscrolltop.nativeElement.style.display = 'block';
     }else{
-      btn.style.display = 'none';
+      this.btnscrolltop.nativeElement.style.display = 'none'
 
     }
     
@@ -303,5 +306,11 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
       console.log( key + ' = ' + values);
       
     }
+  }
+
+
+  editVenta(venta:VentaI):void{
+    this.diamanteSVC.venta = venta;
+    this.route.navigate(['/edit']);
   }
 }

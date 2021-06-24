@@ -5,6 +5,170 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
     overflow-x: hidden;
 }
 
+.text-center{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 18px;
+}
+
+.card-venta{
+    width: 50%;
+    margin: 15px auto;
+}
+
+.diamante{
+  width: 300px;
+  margin: 15px auto;
+}
+
+.imgDiamante{
+    width: 150px;
+    display: block;
+    margin: auto;
+    border-radius: 10px 10px;
+}
+
+.radio{
+    width: 25%;
+    display: block;
+    margin: auto;
+}
+
+.margen{
+    padding: 15px 15px ;
+    margin: 15px 15px;
+    border: 5px solid slateblue ;
+    border-radius: 15px 15px;
+    transition: transform .2s;
+    box-shadow: 10px 10px 8px 5px #673ab7;
+}
+
+.margen:hover{
+    transform: scale(1.1);
+}
+
+.container{
+    margin: 15px auto;
+    padding: 15px 15px;
+    font-size: 16px;
+}
+.example-full-width {
+    width: 100%;
+}
+
+.btn-block{
+    width: 100%;
+    padding: 15px 15px;
+    margin-top: 5px;
+    font-size: 24px;
+}
+
+.progress{
+    height: 30px;
+    border-radius: 15px 15px;
+}
+
+.example-button-container {
+    display: block;
+    justify-content: flex-start;
+    width: 120px;
+    float: right;
+    transition: transform .2s;
+}
+
+
+.example-button-container:hover{
+    transform: scale(1.2);
+}
+
+.parrafos{
+    font-size: 18px;
+}
+
+.redondeado{
+    background:#673ab7;
+    border-radius: 15px 15px;
+    padding: 15px;
+    color: white;
+    font-style: normal;
+    box-shadow: 10px 10px 8px #673ab7;
+}
+
+.img-rounded{
+    cursor: pointer;
+}
+
+.form-content{
+    margin-top: 15px;
+}
+
+.aria-label{
+    font-size: 18px;
+}
+
+
+.example-list {
+    width: 500px;
+    max-width: 100%;
+    border: solid 1px #ccc;
+    min-height: 60px;
+    display: block;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  
+  .example-box {
+    padding: 20px 10px;
+    border-bottom: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+    font-size: 14px;
+  }
+  
+  .cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+  
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .example-box:last-child {
+    border: none;
+  }
+  
+  .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .example-custom-placeholder {
+    background: #ccc;
+    border: dotted 3px #999;
+    min-height: 60px;
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+
+/* @media only screen and (max-width: 500px){
+    .imgDiamante{
+        width: 50%;
+    }
+} */
+
+
 .edit{
   
     display: grid;

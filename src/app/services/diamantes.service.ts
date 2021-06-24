@@ -16,6 +16,7 @@ import { DiamanteI } from '../models/diamante';
 export class DiamantesService {
 
   url:string;
+  public venta: VentaI = {};
   constructor(private dtf : AngularFireDatabase,
     private http: HttpClient,
     private storage: AngularFireStorage,
@@ -104,5 +105,10 @@ export class DiamantesService {
 
   public deleteVenta(venta:VentaI){
     return this.dtf.list('Venta').remove(venta.idVentaRef);
+  }
+
+  public updateVenta(venta:VentaI){
+    return this.dtf.list('Venta').update(venta.idVentaRef,venta);
+  
   }
 }
