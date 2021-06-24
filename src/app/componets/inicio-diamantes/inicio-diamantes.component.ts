@@ -67,10 +67,15 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
       });
       this.ventasSearch = this.ventas;
       this.getValorVentas();
+
+      // this.getFechasQuery(this.ventas);
+
     },error =>{
       console.log(error);
       swal('Error', error,'error');
     })
+
+
 
     
   }
@@ -280,5 +285,23 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
 
   scrollTop():void{
     window.scrollTo({top: 0,behavior: 'smooth'});
+  }
+
+  getFechasQuery(venta:VentaI[]):void{
+    let coleccion = new Map();
+    // venta.map((ventaOne,i)=>{
+    //   if(ventaOne.numeroVenta === ventaOne.numeroVenta){
+    //     coleccion.set(ventaOne.numeroVenta,ventaOne);
+    //   }
+    // })
+
+    venta.forEach(v =>{
+      coleccion.set(v.numeroVenta,v);
+    })
+    
+    for(let [key,values] of coleccion){
+      console.log( key + ' = ' + values);
+      
+    }
   }
 }
