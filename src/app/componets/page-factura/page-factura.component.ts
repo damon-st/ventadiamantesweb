@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Img, PdfMakeWrapper, QR, Table, Txt } from 'pdfmake-wrapper';
 import { ITable } from 'pdfmake-wrapper/lib/interfaces';
@@ -13,12 +14,13 @@ import { DiamantesService } from 'src/app/services/diamantes.service';
 export class PageFacturaComponent implements OnInit {
 
 
-  respuesta:any = 'Se descargado la factura :D';
+  respuesta:any = 'Porfavor espera en unos instantes se comenzara a descargar la factura :D';
   venta:VentaI[] = [];
 
   constructor(private ventaSVC: DiamantesService,
     private router:Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -32,6 +34,7 @@ export class PageFacturaComponent implements OnInit {
         res.forEach(x => {
           this.venta.push(x as VentaI);
         });
+
         this.factura(this.venta[0]);
       }else{
         this.respuesta = "Nose encontro la factura lo siento :("
@@ -43,9 +46,10 @@ export class PageFacturaComponent implements OnInit {
     })
   }
 
-
-  
   async factura(venta:VentaI){
+    this._snackBar.open('Descargando PDF por favor espere...','ok',{
+      duration: 2000
+    })
     const pdf = new PdfMakeWrapper();
     const numeroR =  Math.floor(Math.random()*1000);
     pdf.header(new Txt(`Factura N° ${numeroR}`).fontSize(15).end);
@@ -91,7 +95,7 @@ export class PageFacturaComponent implements OnInit {
 
      pdf.create().download(`ID ${venta.descripcion}`);
     //  pdf.create().open();
-
+      this.respuesta = "Se a descargado gracias :D ";
     
   }
 
