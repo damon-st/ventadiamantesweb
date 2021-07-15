@@ -89,8 +89,8 @@ export class PageFacturaComponent implements OnInit {
 
 
 
-    //  pdf.create().download(`ID ${venta.descripcion}`);
-     pdf.create().open();
+     pdf.create().download(`ID ${venta.descripcion}`);
+    //  pdf.create().open();
 
     
   }
