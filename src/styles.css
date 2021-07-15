@@ -352,6 +352,16 @@ background: linear-gradient(90deg, rgba(103,58,183,1) 0%, rgba(116,12,128,1) 50%
     
 }
 
+
+.cancelado{
+    opacity: .5;
+}
+
+.no-cancelado{
+    opacity: 1;
+}
+
+
 @media only screen and (max-width: 560px){
     .btn-large{
         width: 100%;

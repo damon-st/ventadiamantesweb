@@ -70,6 +70,7 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
         this.ventas.push(venta as VentaI);
       });
       this.ventasSearch = this.ventas;
+      this.comparacionPagado();
       this.getValorVentas();
 
       // this.getFechasQuery(this.ventas);
@@ -84,13 +85,34 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
     
   }
 
-  getValorVentas(){
+  comparacionPagado():void{
+    var posicion =-1;
+    for(var i =0; i < this.ventas.length; i++){
+     
+      if( this.ventas[i].colorValorPorVenta.includes('hasta',0)){
+        posicion = i;
+        
+      }
+    }
+
+    console.log(posicion);
+    
+
+    for(var i = posicion; i>= 0; i-- ){
+      this.ventas[i].cancel = true;
+    }
+
+  }
+
+  getValorVentas(): void{
     this.numerodeVentas  = 0;
     this.totalVentas =0;
     this.numerodeVentas = this.ventas.length;
     this.ventas.forEach(venta =>{
-      this.totalVentas +=venta.precioDiamante;
-    })
+      if(!venta.cancel){
+        this.totalVentas +=venta.precioDiamante;
+      }
+    });
     this.totalVentasTexto = this.totalVentas.toFixed(2);
   }
 
@@ -246,6 +268,8 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
     pdf.add(pdf.ln(1));
     pdf.add(
       new QR(`
+          Telejas\n
+          Venta de Diamantes de FreeFire\n
           ID JUGADOR = ${venta.descripcion}\n
           Fecha de venta = ${venta.fechaVenta}\n
           Valor Total = ${venta.precioDiamante}\n

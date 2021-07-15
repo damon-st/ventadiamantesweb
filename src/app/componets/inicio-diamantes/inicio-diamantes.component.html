@@ -28,7 +28,9 @@
   <div class="container-venta" *ngIf="ventas.length>0">
     <div *ngFor="let venta of ventas" >
      
-        <mat-card>
+        <mat-card 
+        [ngClass]="venta.cancel ? 'cancelado': 'no-cancelado'"
+        >
             <mat-card-header>
                 <mat-card-title>{{venta.fechaVenta}}
         

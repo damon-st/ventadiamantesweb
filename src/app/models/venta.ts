@@ -10,7 +10,7 @@ export class VentaI{
     precioDiamante?: number;
     vendedorName?:string;
     vendedorUID?: string;
-
+    cancel?:boolean;
 }
 
 export class ImagesRef{
