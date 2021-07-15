@@ -111,4 +111,9 @@ export class DiamantesService {
     return this.dtf.list('Venta').update(venta.idVentaRef,venta);
   
   }
+
+
+  public getVentaID(id:any){
+    return this.dtf.list('Venta',query=> query.orderByChild('idVentaRef').equalTo(id)).valueChanges();
+  }
 }

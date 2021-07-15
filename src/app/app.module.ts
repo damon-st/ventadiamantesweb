@@ -37,7 +37,8 @@ import { AddRespuestaComponent } from './componets/add-respuesta/add-respuesta.c
 // Import pdfmake-wrapper and the fonts to use
 import { PdfMakeWrapper } from 'pdfmake-wrapper';
 import pdfFonts from "pdfmake/build/vfs_fonts";
-import { EditVentaComponent } from './componets/edit-venta/edit-venta.component'; // fonts provided for pdfmake
+import { EditVentaComponent } from './componets/edit-venta/edit-venta.component';
+import { PageFacturaComponent } from './componets/page-factura/page-factura.component'; // fonts provided for pdfmake
 // Set the fonts to use
 PdfMakeWrapper.setFonts(pdfFonts);
 
@@ -54,7 +55,8 @@ PdfMakeWrapper.setFonts(pdfFonts);
     InicioDiamantesComponent,
     VentaImagenesComponent,
     AddRespuestaComponent,
-    EditVentaComponent
+    EditVentaComponent,
+    PageFacturaComponent
   ],
   imports: [
     BrowserModule,

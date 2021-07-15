@@ -4,6 +4,7 @@ import {LoginComponent} from '../app/componets/login/login.component';
 import { EditVentaComponent } from './componets/edit-venta/edit-venta.component';
 import { HomeComponent } from './componets/home/home.component';
 import { InicioDiamantesComponent } from './componets/inicio-diamantes/inicio-diamantes.component';
+import { PageFacturaComponent } from './componets/page-factura/page-factura.component';
 import { GuardGuard } from './gruads/guard.guard';
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'home',component:HomeComponent, canActivate: [GuardGuard]},
   {path: 'diamantes',component:InicioDiamantesComponent, canActivate:[GuardGuard]},
   {path: 'edit',component:EditVentaComponent, canActivate:[GuardGuard]},
+  {path: 'factura/:id',component:PageFacturaComponent},
   {path: '**', component:LoginComponent}
 ];
 

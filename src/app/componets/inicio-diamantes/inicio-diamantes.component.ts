@@ -95,7 +95,6 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
       }
     }
 
-    console.log(posicion);
     
 
     for(var i = posicion; i>= 0; i-- ){
@@ -266,17 +265,23 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
     pdf.add(pdf.ln(2));
     pdf.add(this.crearTablaFacutra(venta));
     pdf.add(pdf.ln(1));
+    // pdf.add(
+    //   new QR(`
+    //       Telejas\n
+    //       Venta de Diamantes de FreeFire\n
+    //       ID JUGADOR = ${venta.descripcion}\n
+    //       Fecha de venta = ${venta.fechaVenta}\n
+    //       Valor Total = ${venta.precioDiamante}\n
+    //       ID VENTA = ${venta.idVentaRef}
+    //   `).fit(150).alignment('center').end
+    // );
+   
+
     pdf.add(
       new QR(`
-          Telejas\n
-          Venta de Diamantes de FreeFire\n
-          ID JUGADOR = ${venta.descripcion}\n
-          Fecha de venta = ${venta.fechaVenta}\n
-          Valor Total = ${venta.precioDiamante}\n
-          ID VENTA = ${venta.idVentaRef}
-      `).fit(100).alignment('center').end
+      https://ventadiamantes-329aa.firebaseapp.com/factura/${venta.idVentaRef}
+      `).fit(150).alignment('center').end
     );
-   
 
     pdf.footer(`Nota: Este comprabante no es valido para reclamos o en ciertas entidades gracias por preferirnos.`);
 
