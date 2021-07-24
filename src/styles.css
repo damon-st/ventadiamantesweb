@@ -327,7 +327,7 @@ background: linear-gradient(90deg, rgba(103,58,183,1) 0%, rgba(116,12,128,1) 50%
     display: none;
     position: fixed;
     bottom: 20px;
-    right: 20px;
+    right: 80px;
     z-index: 200;
     font-size: 18px;
     border: none;
@@ -343,6 +343,28 @@ background: linear-gradient(90deg, rgba(103,58,183,1) 0%, rgba(116,12,128,1) 50%
 
 .btn-scroll-top:hover{
     background-color: red;
+}
+
+.btn-scroll-bottom:hover{
+    background-color: red;
+}
+
+
+.btn-scroll-bottom{
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 200;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #673ab7;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+    transition: 0.3s ease-in-out all;
 }
 
 

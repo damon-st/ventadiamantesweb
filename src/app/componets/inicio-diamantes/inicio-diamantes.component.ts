@@ -38,6 +38,7 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
 
   
   @ViewChild('btnscrolltop') btnscrolltop : ElementRef;
+  @ViewChild('btnscrollbottom') btnscrollbottom : ElementRef;
 
   constructor(private diamanteSVC: DiamantesService, 
     private matDialog: MatDialog,
@@ -309,15 +310,23 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
     if(document.body.scrollTop > 40 || document.documentElement.scrollTop >40){
       this.btnscrolltop.nativeElement.style.display = 'block';
     }else{
-      this.btnscrolltop.nativeElement.style.display = 'none'
+      this.btnscrolltop.nativeElement.style.display = 'none';
 
     }
+
+    
     
   }
 
   scrollTop():void{
     window.scrollTo({top: 0,behavior: 'smooth'});
   }
+
+  scrollBottom():void{
+    window.scrollTo(0,document.body.scrollHeight||document.documentElement.scrollHeight);
+  }
+
+  
 
   getFechasQuery(venta:VentaI[]):void{
     let coleccion = new Map();
