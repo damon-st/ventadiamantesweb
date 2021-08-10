@@ -169,7 +169,7 @@ export class EditVentaComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<ImagesRef[]>){
-    moveItemInArray(this.imgRef,event.previousIndex,event.currentIndex);
+    moveItemInArray(this.ventaDiamante.image,event.previousIndex,event.currentIndex);
   }
 
   getNumeroVenta(){
