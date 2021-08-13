@@ -312,9 +312,32 @@ background: linear-gradient(90deg, rgba(103,58,183,1) 0%, rgba(116,12,128,1) 50%
     width: 100%;
     padding: 5px 5px 5px 5px;
     display: grid;
-    grid-template-columns: 1fr 1fr ;
+    grid-template-rows: 1fr;
     grid-gap: 5px;
     margin-bottom: 100px;
+}
+
+.conainter-venta-ventas{
+    width: 100%;
+    padding: 5px 5px 5px 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+}
+
+.sticky{
+    width: 100%;
+    z-index: 1000;
+    position: sticky;
+    top: 0;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-venta-fecha{
+    grid-row-start: 1;
+   
 }
 
 .busqueda{
@@ -414,6 +437,10 @@ background: linear-gradient(90deg, rgba(103,58,183,1) 0%, rgba(116,12,128,1) 50%
     }
     
     .background-black{
+        grid-template-columns: 1fr;
+    }
+
+    .conainter-venta-ventas{
         grid-template-columns: 1fr;
     }
 }

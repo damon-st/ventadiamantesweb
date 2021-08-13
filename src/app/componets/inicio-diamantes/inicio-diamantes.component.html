@@ -25,62 +25,77 @@
   </aside>
   
 
-  <div class="container-venta" *ngIf="ventas.length>0">
-    <div *ngFor="let venta of ventas" >
-     
-        <mat-card 
-        [ngClass]="venta.cancel ? 'cancelado': 'no-cancelado'"
-        >
-            <mat-card-header>
-                <mat-card-title>{{venta.fechaVenta}}
-        
-                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                        <mat-icon>more_vert</mat-icon>
-                      </button>
-                      <mat-menu #menu="matMenu">
-                        <button mat-menu-item (click)="openImages(venta)">
-                          <mat-icon>collections</mat-icon>
-                          <span >Ver Imagenes</span>
-                        </button>
-                        <button mat-menu-item (click)="addRespuesta(venta)">
-                          <mat-icon>question_answer</mat-icon>
-                          <span>Añadir Respuesta</span>
-                        </button>
-                        <button mat-menu-item (click)="editVenta(venta)">
-                          <mat-icon>edit</mat-icon>
-                          <span>Editar</span>
-                        </button>
-                        <button mat-menu-item (click)="quitarRespuesta(venta)">
-                          <mat-icon>backspace</mat-icon>
-                          <span>Quitar Anotado</span>
-                        </button>
-                        <button mat-menu-item (click)="factura(venta)">
-                          <mat-icon>file_download</mat-icon>
-                          <span>Factura</span>
-                        </button>
-                        <button mat-menu-item (click)="deleteVenta(venta)">
-                          <mat-icon>delete</mat-icon>
-                          <span>Eliminar</span>
-                        </button>
-                        
-                      </mat-menu>
-                </mat-card-title>
-                
-            </mat-card-header>
-            <mat-card-content>
-                <img  src="assets/img/diamante.jpg" alt="diamantes" class="img-venta"> 
-            </mat-card-content>
 
-            <mat-card-footer>
-                <p class="texto-venta">${{venta.descripcionDiamantes}}</p>
-                <p class="texto-venta">{{venta.vendedorName}}</p>
-                <p class="texto-venta">${{venta.precioDiamante}}</p>
-                <p class="texto-venta">{{venta.descripcion}}</p>
-                <p class="texto-venta">{{venta.colorValorPorVenta}}</p>
-                <div class="color-venta" *ngIf="venta.colorValorPorVenta"></div>
-            </mat-card-footer>
+
+
+  <div class="container-venta" *ngIf="ventas.length>0">
+    <div  *ngFor="let agrup of agrupado; index as i" >
+     
+      <div class="sticky">
+        <mat-card class="container-venta-fecha">
+          <mat-card-title>{{agrup.venta[0].fechaVenta}}</mat-card-title>
         </mat-card>
-        
+      </div>
+      
+      <div class="conainter-venta-ventas">
+        <div  *ngFor="let venta of agrup.venta">
+
+          <mat-card 
+          [ngClass]="venta.cancel ? 'cancelado': 'no-cancelado'"
+          >
+              <mat-card-header>
+                  <mat-card-title>{{venta.fechaVenta}}
+          
+                      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                          <button mat-menu-item (click)="openImages(venta)">
+                            <mat-icon>collections</mat-icon>
+                            <span >Ver Imagenes</span>
+                          </button>
+                          <button mat-menu-item (click)="addRespuesta(venta)">
+                            <mat-icon>question_answer</mat-icon>
+                            <span>Añadir Respuesta</span>
+                          </button>
+                          <button mat-menu-item (click)="editVenta(venta)">
+                            <mat-icon>edit</mat-icon>
+                            <span>Editar</span>
+                          </button>
+                          <button mat-menu-item (click)="quitarRespuesta(venta)">
+                            <mat-icon>backspace</mat-icon>
+                            <span>Quitar Anotado</span>
+                          </button>
+                          <button mat-menu-item (click)="factura(venta)">
+                            <mat-icon>file_download</mat-icon>
+                            <span>Factura</span>
+                          </button>
+                          <button mat-menu-item (click)="deleteVenta(venta)">
+                            <mat-icon>delete</mat-icon>
+                            <span>Eliminar</span>
+                          </button>
+                          
+                        </mat-menu>
+                  </mat-card-title>
+                  
+              </mat-card-header>
+              <mat-card-content>
+                  <img  src="assets/img/diamante.jpg" alt="diamantes" class="img-venta"> 
+              </mat-card-content>
+  
+              <mat-card-footer>
+                  <p class="texto-venta">${{venta.descripcionDiamantes}}</p>
+                  <p class="texto-venta">{{venta.vendedorName}}</p>
+                  <p class="texto-venta">${{venta.precioDiamante}}</p>
+                  <p class="texto-venta">{{venta.descripcion}}</p>
+                  <p class="texto-venta">{{venta.colorValorPorVenta}}</p>
+                  <div class="color-venta" *ngIf="venta.colorValorPorVenta"></div>
+              </mat-card-footer>
+          </mat-card>
+        </div>
+      </div>
+      
+     
     </div>
   </div>
 

@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Img, ITable, PdfMakeWrapper, QR, Table, Txt } from 'pdfmake-wrapper';
-import { ImagesRef, VentaI } from 'src/app/models/venta';
+import { Agrupado, ImagesRef, Llaves, VentaI } from 'src/app/models/venta';
 import { DiamantesService } from 'src/app/services/diamantes.service';
 import swal from 'sweetalert';
 import { AddRespuestaComponent } from '../add-respuesta/add-respuesta.component';
@@ -35,6 +35,14 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
   });
 
   mediaQueryList: MediaQueryList;
+
+  final: any;
+
+  agrupado: Agrupado[] = [];
+  
+  llaves: any [] = [];
+
+  objetoFinal = {fecha: null, venta: []};
 
   
   @ViewChild('btnscrolltop') btnscrolltop : ElementRef;
@@ -75,6 +83,50 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
       this.getValorVentas();
 
       // this.getFechasQuery(this.ventas);
+
+      this.final = this.ventas.reduce(function(p: VentaI,c: VentaI){
+        p[c.numeroVenta] = p[c.numeroVenta] || [];
+        p[c.numeroVenta].push(c);
+        return p;
+      },{});
+
+      this.final=  Object.entries(this.final);
+      // Object.keys(this.final).map(function(key){
+      //   arr.push(this.fin);
+      //   return arr;
+      // });
+
+      let valor = new Map(this.final);
+
+      let llave = Array.from(valor.keys());
+
+      console.log(llave);
+      
+    
+      for(var i =0; i < llave.length; i++){
+        
+        this.objetoFinal.fecha = llave[i];
+        
+        this.objetoFinal.venta.push(valor.get(llave[i]) as VentaI);
+        
+        this.agrupado[i] = { fecha: this.objetoFinal.fecha, venta: this.objetoFinal.venta[0]};
+        this.objetoFinal.fecha = "";
+        this.objetoFinal.venta = [];
+      }
+
+    
+
+      console.log(this.agrupado);
+      
+      
+      
+      
+      
+      
+
+
+      
+      
 
     },error =>{
       console.log(error);

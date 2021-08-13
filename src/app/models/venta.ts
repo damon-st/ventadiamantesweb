@@ -16,3 +16,12 @@ export class VentaI{
 export class ImagesRef{
     img: string;
 }
+
+export class Agrupado{
+    fecha?: any;
+    venta?: VentaI[];
+}
+
+export class Llaves{
+    value: any;
+}
