@@ -100,7 +100,7 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
 
       let llave = Array.from(valor.keys());
 
-      console.log(llave);
+      // console.log(llave);
       
     
       for(var i =0; i < llave.length; i++){
@@ -114,19 +114,7 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
         this.objetoFinal.venta = [];
       }
 
-    
-
-      console.log(this.agrupado);
-      
-      
-      
-      
-      
-      
-
-
-      
-      
+      // console.log(this.agrupado);
 
     },error =>{
       console.log(error);

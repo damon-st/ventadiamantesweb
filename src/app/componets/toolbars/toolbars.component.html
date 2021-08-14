@@ -1,4 +1,4 @@
-<mat-toolbar class="nav-bar" color="primary">
+<!-- <mat-toolbar class="nav-bar" color="primary">
     <mat-toolbar-row>
       <span class="shadow" routerLink="home" routerLinkActive="active">VENTA DE DIAMANTES</span>
       <span class="shadow inicio menu-inicio" *ngIf="(auth.user | async)" routerLink="diamantes" routerLinkActive="active">Ventas</span>
@@ -17,4 +17,16 @@
     <li routerLink="diamantes" routerLinkActive="active">Ventas</li>
     <li (click)="logout()">Cerrar Seccion</li>
   </ul>
-</div>
+</div> -->
+
+
+<input  class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
+  	<label for="menu-icon"></label>
+  	<nav class="nav" > 		
+  		<ul class="pt-5" *ngIf="(auth.user | async)">
+  			<li class="hola" routerLink="home"  routerLinkActive="active"><a >VENTA DE DIAMANTES</a></li>
+  			<li class="hola" routerLink="diamantes" routerLinkActive="active"><a  >Ventas</a></li>
+  			<li class="hola"><a  (click)="logout()" routerLinkActive="active">Salir</a></li>
+  		</ul>
+  	</nav>
+
