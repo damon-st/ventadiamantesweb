@@ -39,6 +39,7 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
   final: any;
 
   agrupado: Agrupado[] = [];
+  agrupadoSearch: Agrupado[] = [];
   
   llaves: any [] = [];
 
@@ -84,35 +85,9 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
 
       // this.getFechasQuery(this.ventas);
 
-      this.final = this.ventas.reduce(function(p: VentaI,c: VentaI){
-        p[c.numeroVenta] = p[c.numeroVenta] || [];
-        p[c.numeroVenta].push(c);
-        return p;
-      },{});
+      this.agruparVentas();
+      this.agrupadoSearch = this.agrupado;
 
-      this.final=  Object.entries(this.final);
-      // Object.keys(this.final).map(function(key){
-      //   arr.push(this.fin);
-      //   return arr;
-      // });
-
-      let valor = new Map(this.final);
-
-      let llave = Array.from(valor.keys());
-
-      // console.log(llave);
-      
-    
-      for(var i =0; i < llave.length; i++){
-        
-        this.objetoFinal.fecha = llave[i];
-        
-        this.objetoFinal.venta.push(valor.get(llave[i]) as VentaI);
-        
-        this.agrupado[i] = { fecha: this.objetoFinal.fecha, venta: this.objetoFinal.venta[0]};
-        this.objetoFinal.fecha = "";
-        this.objetoFinal.venta = [];
-      }
 
       // console.log(this.agrupado);
 
@@ -125,6 +100,41 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
 
     
   }
+
+
+  agruparVentas():void{
+    this.final = this.ventas.reduce(function(p: VentaI,c: VentaI){
+      p[c.numeroVenta] = p[c.numeroVenta] || [];
+      p[c.numeroVenta].push(c);
+      return p;
+    },{});
+
+    this.final=  Object.entries(this.final);
+    // Object.keys(this.final).map(function(key){
+    //   arr.push(this.fin);
+    //   return arr;
+    // });
+
+    let valor = new Map(this.final);
+
+    let llave = Array.from(valor.keys());
+
+    // console.log(llave);
+    
+  
+    for(var i =0; i < llave.length; i++){
+      
+      this.objetoFinal.fecha = llave[i];
+      
+      this.objetoFinal.venta.push(valor.get(llave[i]) as VentaI);
+      
+      this.agrupado[i] = { fecha: this.objetoFinal.fecha, venta: this.objetoFinal.venta[0]};
+      this.objetoFinal.fecha = "";
+      this.objetoFinal.venta = [];
+    }
+
+  }
+
 
   comparacionPagado():void{
     var posicion =-1;
@@ -166,13 +176,20 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
          });       
       
            this.ventas= [];
+           this.agrupado = [];
            resultado.forEach(v =>{
              this.ventas.push(v as VentaI);
            })
+
+           this.agruparVentas();
+           this.getValorVentas();
          
        
     }else{
+      this.ventas = [];
       this.ventas = this.ventasSearch;
+      this.agrupado = [];
+      this.agrupado = this.agrupadoSearch;
       this.getValorVentas();
     }
  
@@ -189,7 +206,10 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
    const inicio = this.getFechaNumber(fechaInicio);
    const final = this.getFechaNumber(fechaFinal);
 
-   if(inicio !== 0 || final !==0){
+   console.log(start);
+   
+
+   if((inicio !== 0 || final !==0) && start !== null){
     let resultado= this.ventas.filter((v:VentaI)=>{
        if(v.numeroVenta >= inicio && v.numeroVenta <= final){
           return v;
@@ -197,10 +217,14 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
      });
      if(resultado.length !==0){
        this.ventas = [];
+       this.agrupado = [];
+       
      
      resultado.forEach(v =>{
        this.ventas.push(v as VentaI);
-     })
+     });
+
+     this.agruparVentas();
 
      this.getValorVentas();
      }
@@ -208,6 +232,8 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
    }else{
      this.ventas =[];
      this.ventas = this.ventasSearch;
+     this.agrupado = [];
+     this.agrupado = this.agrupadoSearch;
      this.getValorVentas();
    }
   }

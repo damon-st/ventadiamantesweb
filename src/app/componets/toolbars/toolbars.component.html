@@ -23,7 +23,7 @@
 <input  class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
   	<label for="menu-icon"></label>
   	<nav class="nav" > 		
-  		<ul class="pt-5" *ngIf="(auth.user | async)">
+  		<ul class="pt-5" *ngIf="uid !==''">
   			<li class="hola" routerLink="home"  routerLinkActive="active"><a >VENTA DE DIAMANTES</a></li>
   			<li class="hola" routerLink="diamantes" routerLinkActive="active"><a  >Ventas</a></li>
   			<li class="hola"><a  (click)="logout()" routerLinkActive="active">Salir</a></li>

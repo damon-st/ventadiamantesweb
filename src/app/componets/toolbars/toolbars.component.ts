@@ -12,23 +12,34 @@ export class ToolbarsComponent implements OnInit, AfterViewInit {
 
   isLogin;
 
+  uid:any = '';
+
   constructor(public auth: AuthService,
               private router: Router) { 
   
   }
 
   ngOnInit(): void {
-    
+    this.auth.user.subscribe(res => {
+      if(res){
+        this.uid = res.uid;
+        this.closeClick();
+      }
+      
+    },err =>{
+      console.log(err);
+      
+    })
   }
 
   ngAfterViewInit():void{
-    this.closeClick();
-
+   
   }
 
 
   logout(){
     this.auth.logout().then(user => {
+      this.uid = '';
       this.router.navigate(['/login']);
     }).catch(err =>{console.log(err);}
     );
@@ -45,16 +56,18 @@ export class ToolbarsComponent implements OnInit, AfterViewInit {
   closeClick():void{
     
 
+  
     setTimeout(() => {
       let navLink = document.querySelectorAll('.hola');
-    let input = <HTMLInputElement> document.getElementById('menu-icon');
-
-    navLink.forEach(n => n.addEventListener('click',function(){
-          input.checked = ! input.checked;
-          console.log(input.checked);
-          
-    }));
+      let input = <HTMLInputElement> document.getElementById('menu-icon');
+  
+      navLink.forEach(n => n.addEventListener('click',function(){
+            input.checked = ! input.checked;
+            console.log(input.checked);
+            
+      }));
     }, 1000);
+ 
   }
 
 }
