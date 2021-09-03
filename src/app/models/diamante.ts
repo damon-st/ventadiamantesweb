@@ -6,3 +6,10 @@ export interface DiamanteI{
    path: number;
 
 }
+
+export interface GalleryI{
+   id :string;
+   size: string;
+   src: string;
+   thumb: string;
+}

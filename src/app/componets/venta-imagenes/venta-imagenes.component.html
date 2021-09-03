@@ -1,5 +1,5 @@
 <mat-dialog-content>
-<ngx-slick-carousel
+<!-- <ngx-slick-carousel
 class="carousels"
 #slickModla="slick-carousel"
 [config]="slideConfig"
@@ -13,7 +13,15 @@ class="carousels"
     </div>
 
 
-</ngx-slick-carousel>
+</ngx-slick-carousel> -->
+
+
+<lightgallery [settings]="settings" [onInit]="onInit">
+    <a *ngFor="let item of items" [attr.data-lg-size]="item.size" className="gallery-item" [attr.href]="item.src">
+        <img width="50%" className="img-responsive" src="{{ item.thumb }}" />
+     </a>
+</lightgallery>
+
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-raised-button color="primary" (click)="closeDialog()">Cerrar</button>

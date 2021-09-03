@@ -24,6 +24,7 @@
     "@angular/router": "~11.0.5",
     "firebase": "^7.0 || ^8.0",
     "jquery": "^3.5.1",
+    "lightgallery": "^2.2.0",
     "ngx-slick-carousel": "^0.5.1",
     "pdfmake": "^0.1.71",
     "pdfmake-wrapper": "^2.1.1",

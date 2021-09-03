@@ -42,6 +42,7 @@ import { PageFacturaComponent } from './componets/page-factura/page-factura.comp
 // Set the fonts to use
 PdfMakeWrapper.setFonts(pdfFonts);
 
+import { LightgalleryModule } from 'lightgallery/angular/10';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,7 @@ PdfMakeWrapper.setFonts(pdfFonts);
     AngularFireDatabaseModule,
     AngularFireMessagingModule,
     HttpClientModule,
-    
+    LightgalleryModule
     
   ],
   providers: [{provide:BUCKET,useValue:'gs://ventadiamantes-329aa.appspot.com'},AuthService,DiamantesService],
