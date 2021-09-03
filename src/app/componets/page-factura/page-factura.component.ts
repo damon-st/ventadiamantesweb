@@ -100,13 +100,13 @@ export class PageFacturaComponent implements OnInit {
   }
 
   crearTablaFacutra(venta:VentaI): ITable{
-    const iva = venta.precioDiamante * 0.12;
-    const subtotal =  venta.precioDiamante - iva;
+    // const iva = venta.precioDiamante * 0.12;
+    // const subtotal =  venta.precioDiamante - iva;
       return new Table([
         ['Cantidad',new Txt('Descripción').bold().alignment('center').end,'V.Unitario' ,'V.Total'],
         [1, `Recarga online del Juego FreeFire diamantes ${venta.descripcionDiamantes} \n\n\n\n`,'',venta.precioDiamante],
-        ['','',new Txt('SUBTOTAL').bold().alignment('right').end,subtotal.toFixed(2)],
-        ['','',new Txt('IVA %12').bold().alignment('right').end, iva.toFixed(2)],
+        ['','',new Txt('SUBTOTAL').bold().alignment('right').end,venta.precioDiamante],
+        ['','',new Txt('IVA 12%').bold().alignment('right').end, 0],
         ['','',new Txt('TOTAL').bold().alignment('right').end, venta.precioDiamante]
       ]).end;
   }

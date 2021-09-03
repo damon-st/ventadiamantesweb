@@ -45,6 +45,9 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
 
   objetoFinal = {fecha: null, venta: []};
 
+  slideIndex: number = 1;
+
+  images:any = [];
   
   @ViewChild('btnscrolltop') btnscrolltop : ElementRef;
   @ViewChild('btnscrollbottom') btnscrollbottom : ElementRef;
@@ -62,6 +65,8 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
     window.onscroll = ()=>{
       this.scrollFunction();
     }
+
+    
   }
 
   ngOnInit(): void {
@@ -253,9 +258,12 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
 
   openImages(venta: VentaI){
     console.log(venta);
-    this.matDialog.open(VentaImagenesComponent,{
-      data: venta.image
-    })
+    // this.matDialog.open(VentaImagenesComponent,{
+    //   data: venta.image
+    // })
+    this.images = [];
+    this.images.push(venta.image);
+    this.openModal();
   }
 
   addRespuesta(venta:VentaI){
@@ -360,13 +368,13 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
   }
 
   crearTablaFacutra(venta:VentaI): ITable{
-    const iva = venta.precioDiamante * 0.12;
-    const subtotal =  venta.precioDiamante - iva;
+    // const iva = venta.precioDiamante * 0.12;
+    // const subtotal =  venta.precioDiamante - iva;
       return new Table([
         ['Cantidad',new Txt('Descripción').bold().alignment('center').end,'V.Unitario' ,'V.Total'],
         [1, `Recarga online del Juego FreeFire diamantes ${venta.descripcionDiamantes} \n\n\n\n`,'',venta.precioDiamante],
-        ['','',new Txt('SUBTOTAL').bold().alignment('right').end,subtotal.toFixed(2)],
-        ['','',new Txt('IVA %12').bold().alignment('right').end, iva.toFixed(2)],
+        ['','',new Txt('SUBTOTAL').bold().alignment('right').end,venta.precioDiamante],
+        ['','',new Txt('IVA 12%').bold().alignment('right').end, 0],
         ['','',new Txt('TOTAL').bold().alignment('right').end, venta.precioDiamante]
       ]).end;
   }
@@ -416,5 +424,41 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
   editVenta(venta:VentaI):void{
     this.diamanteSVC.venta = venta;
     this.route.navigate(['/edit']);
+  }
+
+
+   openModal():void {
+    document.getElementById("myModal").style.display = "block";
+    this.currentSlide(1);
+  }
+  
+   closeModal():void {
+    document.getElementById("myModal").style.display = "none";
+  }
+
+  plusSlides(n) {
+    this.showSlides(this.slideIndex += n);
+  }
+  
+   currentSlide(n) {
+    this.showSlides(this.slideIndex = n);
+  }
+  
+   showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides") as HTMLCollectionOf<HTMLElement>;    
+    var dots = document.getElementsByClassName("demo") as HTMLCollectionOf<HTMLElement>;  
+    var captionText = document.getElementById("caption");
+    if (n > slides.length) {this.slideIndex = 1}
+    if (n < 1) {this.slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+        // slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[this.slideIndex-1].style.display = "block";
+    dots[this.slideIndex-1].className += " active";
+    // captionText.innerHTML = dots[this.slideIndex-1];
   }
 }

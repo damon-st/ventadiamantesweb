@@ -109,3 +109,37 @@
   <span>N° = {{numerodeVentas}}</span>
   <span class="example-spacer"></span>
 </mat-toolbar>
+
+
+
+<div id="myModal" class="modal">
+  <span class="close cursor" (click)="closeModal()">&times;</span>
+  <div class="modal-content">
+
+    <div *ngFor="let image of images;index as i">
+      <div class="mySlides" >
+        <div class="numbertext">{{i}} / {{images.length}}</div>
+        <img [src]="image" style="width:100%">
+      </div>
+    </div>
+  
+
+  
+    
+    <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
+    <a class="next" (click)="plusSlides(1)">&#10095;</a>
+
+    <div class="caption-container">
+      <p id="caption"></p>
+    </div>
+
+
+    <div *ngFor="let image of images;index as i">
+      <div class="column" >
+        <img class="demo cursor" [src]="image" style="width:100%" (click)="currentSlide(i)" alt="Nature and sunrise">
+      </div>
+    </div>
+
+    
+  </div>
+</div>
