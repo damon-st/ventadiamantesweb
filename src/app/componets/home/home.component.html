@@ -8,7 +8,7 @@
   (beforeChange)="beforeChange($event)"
 >
   <div ngxSlickItem class="slide margen" *ngFor="let dia of diamante">
-    <img src="assets/img/diamante.jpg" alt="imagen" class="imgDiamante" />
+    <img loading="lazy" src="assets/img/diamante.jpg" alt="imagen" class="imgDiamante" />
 
     <p class="text-center">{{ dia.diamantes }}</p>
     <p class="text-center">$ {{ dia.valor }}</p>
@@ -56,7 +56,7 @@
     <input #imgFile type="file" (change)="recuperarDirImages($event)" accept=".png, .jpg, .jpeg" multiple>
     <br>
     <input #imageFiles type="hidden" [value]="urlImage | async"/>
-    <mat-progress-bar mode="determinate" [value]="valorSubidaImg" class="progress"></mat-progress-bar>
+    <mat-progress-bar mode="determinate" [value]="valorSubidaImg | async" class="progress"></mat-progress-bar>
 
 
     <!-- <mat-grid-list cdkDropList cols="2" rowHeight="2:1"*ngIf="imgRef.length" (cdkDropListDropped)="drop($event)">

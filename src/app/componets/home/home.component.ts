@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
 
   isReady: boolean = false;
 
-  valorSubidaImg: number =0;
+  valorSubidaImg: Observable<number>;
   fecha: any = "";
   urlImage: Observable<string>;
 
@@ -210,17 +210,18 @@ export class HomeComponent implements OnInit {
         const size = files.size;
               
          if(size >= 1000){
-        this.valorSubidaImg = 10;
         const  id = Math.random().toString(36).substring(2);
         const filePath = `eliminar/${id}`;
         const ref = this.storage.ref(filePath);
         const task = this.storage.upload(filePath,files);
     
+
+        this.valorSubidaImg = task.percentageChanges();
+
         task.snapshotChanges()
         .pipe(finalize(() =>{
           ref.getDownloadURL().subscribe((url)=>{
             this.imgRef = this.imgRef.concat([url]);
-            this.valorSubidaImg = 75;
 
           });
            // this.urlImage = ref.getDownloadURL();        
@@ -306,10 +307,9 @@ export class HomeComponent implements OnInit {
 
 
   cambio(){
-    this.valorSubidaImg = 100;
     // this.imgRef.push(this.imageFiles.nativeElement.value);
     this.imgFile.nativeElement.value = '';
-    this.valorSubidaImg = 0;
+ 
   }
 
   crearVenta(){
@@ -340,7 +340,7 @@ export class HomeComponent implements OnInit {
         if (willDelete) {
          //window.location.reload();
            this.sendNotification(this.ventaDiamante.descripcionDiamantes,this.ventaDiamante.precioDiamante);
-           this.valorSubidaImg= 0;
+           
            this.imgRef = [];
            this.imageFiles.nativeElement.value = '';
            this.ventaDiamante.image = [];

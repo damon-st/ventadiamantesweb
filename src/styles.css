@@ -64,8 +64,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
     font-size: 24px;
 }
 
+.mat-progress-bar {
+  height: 24px !important;
+}
+
 .progress{
-    height: 30px;
+
     border-radius: 15px 15px;
 }
 

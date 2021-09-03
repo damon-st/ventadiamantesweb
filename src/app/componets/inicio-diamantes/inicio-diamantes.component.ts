@@ -12,6 +12,8 @@ import swal from 'sweetalert';
 import { AddRespuestaComponent } from '../add-respuesta/add-respuesta.component';
 import { DialogimageComponent } from '../dialogimage/dialogimage.component';
 import { VentaImagenesComponent } from '../venta-imagenes/venta-imagenes.component';
+
+
 @Component({
   selector: 'app-inicio-diamantes',
   templateUrl: './inicio-diamantes.component.html',
@@ -257,13 +259,11 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
   }
 
   openImages(venta: VentaI){
-    console.log(venta);
-    // this.matDialog.open(VentaImagenesComponent,{
-    //   data: venta.image
-    // })
-    this.images = [];
-    this.images.push(venta.image);
-    this.openModal();
+    
+    this.matDialog.open(VentaImagenesComponent,{
+      data: venta.image
+    })
+    
   }
 
   addRespuesta(venta:VentaI){
@@ -427,38 +427,4 @@ export class InicioDiamantesComponent implements OnInit, AfterViewInit {
   }
 
 
-   openModal():void {
-    document.getElementById("myModal").style.display = "block";
-    this.currentSlide(1);
-  }
-  
-   closeModal():void {
-    document.getElementById("myModal").style.display = "none";
-  }
-
-  plusSlides(n) {
-    this.showSlides(this.slideIndex += n);
-  }
-  
-   currentSlide(n) {
-    this.showSlides(this.slideIndex = n);
-  }
-  
-   showSlides(n) {
-    var i;
-    var slides = document.getElementsByClassName("mySlides") as HTMLCollectionOf<HTMLElement>;    
-    var dots = document.getElementsByClassName("demo") as HTMLCollectionOf<HTMLElement>;  
-    var captionText = document.getElementById("caption");
-    if (n > slides.length) {this.slideIndex = 1}
-    if (n < 1) {this.slideIndex = slides.length}
-    for (i = 0; i < slides.length; i++) {
-        // slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-    slides[this.slideIndex-1].style.display = "block";
-    dots[this.slideIndex-1].className += " active";
-    // captionText.innerHTML = dots[this.slideIndex-1];
-  }
 }
